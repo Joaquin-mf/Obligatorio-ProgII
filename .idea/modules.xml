@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Obligatorio-ProgII.iml" filepath="$PROJECT_DIR$/.idea/Obligatorio-ProgII.iml" />
-      <module fileurl="file://$PROJECT_DIR$/grupoX-p2-tads/grupoX-p2-tads.iml" filepath="$PROJECT_DIR$/grupoX-p2-tads/grupoX-p2-tads.iml" />
     </modules>
   </component>
 </project>
