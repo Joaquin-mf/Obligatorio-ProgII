@@ -1,8 +1,8 @@
 import org.junit.Test;
 import uy.edu.um.adt.binarytree.MySearchBinaryTree;
 import uy.edu.um.adt.binarytree.MySearchBinaryTreeImpl;
-
 import static org.junit.Assert.assertEquals;
+
 
 public class binaryTreeTest {
     @Test
