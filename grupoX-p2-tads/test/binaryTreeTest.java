@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 public class binaryTreeTest {
     @Test
-    public void testAdd(){
+    public void tests(){
         MySearchBinaryTree<Integer,String> arbol = new MySearchBinaryTreeImpl<Integer, String>();
         arbol.add(15,"primero");
         arbol.add(10,"segundo");
@@ -19,5 +19,9 @@ public class binaryTreeTest {
         assertEquals((Integer) 15, arbol.getRoot().getKey());
         assertEquals((Integer) 5, arbol.getRoot().getLeft().getLeft().getKey());
         assertEquals((Integer) 20, arbol.getRoot().getRight().getLeft().getKey());
+
+        arbol.remove(30);
+
+
     }
 }
