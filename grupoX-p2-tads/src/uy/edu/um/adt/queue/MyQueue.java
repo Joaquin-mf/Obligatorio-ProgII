@@ -1,4 +1,4 @@
-package queue;
+package uy.edu.um.adt.queue;
 
 public interface MyQueue<T> {
 

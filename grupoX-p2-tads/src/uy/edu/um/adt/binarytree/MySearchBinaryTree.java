@@ -1,7 +1,7 @@
 /**
  * 
  */
-package binarytree;
+package uy.edu.um.adt.binarytree;
 
 import uy.edu.um.adt.linkedlist.MyList;
 
