@@ -1,5 +1,7 @@
 package uy.edu.um.adt.hash;
 
+import java.util.Objects;
+
 public class HashNode <K,T> {
     private K key;
     private T data;
@@ -10,7 +12,7 @@ public class HashNode <K,T> {
     }
 
     public K getKey() {
-        return key;
+        return this.key;
     }
 
     public void setKey(K key) {
@@ -18,10 +20,23 @@ public class HashNode <K,T> {
     }
 
     public T getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HashNode<?, ?> hashNode = (HashNode<?, ?>) o;
+        return Objects.equals(key, hashNode.key);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(key);
     }
 }

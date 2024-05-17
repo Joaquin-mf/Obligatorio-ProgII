@@ -1,9 +1,12 @@
 package uy.edu.um.adt.hash;
 
+import exceptions.ElementNotFoundException;
+
 public interface MyHash <K,T> {
     void put (K key, T value);
-    T find(K key);
-    void remove(K key);
+    int find(K key);
+    void remove(K key) throws ElementNotFoundException;
     boolean contains(K key);
+    HashNode<K,T> findNode(K key);
 
 }
