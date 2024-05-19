@@ -1,14 +1,11 @@
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CSVReader {
-    public static MyList<SpotifySong> loadCSV(String fileName) { //PREGUNTAR
+    public MyList<SpotifySong> loadCSV(String fileName) { //PREGUNTAR
         MyList<SpotifySong> songs = new MyLinkedListImpl<>();
         String line;
 
