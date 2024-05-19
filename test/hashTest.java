@@ -14,6 +14,9 @@ public class hashTest {
 
         assertEquals(Integer.valueOf(13),tablaHash.getHashTable()[0].getKey());
         assertEquals(Integer.valueOf(26),tablaHash.getHashTable()[1].getKey());
-    }
 
+        int pruebaFind1 = tablaHash.find(21);
+        assertEquals(8, pruebaFind1);
+    }
 }
+
