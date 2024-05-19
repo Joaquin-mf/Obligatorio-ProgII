@@ -1,6 +1,7 @@
 package uy.edu.um.adt.hash;
 
 import exceptions.ElementNotFoundException;
+import exceptions.OutofSize;
 
 import java.util.Hashtable;
 
@@ -14,16 +15,19 @@ public class MyHashImpl<K,T> implements MyHash<K,T>{
     }
 
     @Override
-    public void put(K key, T value) {
+    public void put(K key, T value) throws OutofSize {
         int hashCode = key.hashCode();
         int absHashCode = hashCode & Integer.MAX_VALUE; // Operación bit a bit para obtener el valor absoluto
         int posicion = absHashCode % size;
         HashNode<K, T> newNode = new HashNode(key, value);
+        int attempts = size;
 
         // Manejo de colisiones mediante sondeo lineal
-        while (hashTable[posicion] != null && !hashTable[posicion].getKey().equals(key)) {
+        while (hashTable[posicion] != null && !hashTable[posicion].getKey().equals(key) && attempts > 0) {
             posicion = (posicion + 1) % size;
+            attempts--;
         }
+        if (attempts ==  0){throw new OutofSize();}
         hashTable[posicion] = newNode;
     }
 
