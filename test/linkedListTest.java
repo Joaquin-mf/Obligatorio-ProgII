@@ -1,8 +1,26 @@
+import org.junit.Assert;
 import org.junit.Test;
+import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
+import uy.edu.um.adt.linkedlist.MyList;
+import uy.edu.um.adt.queue.EmptyQueueException;
+import uy.edu.um.adt.queue.MyQueue;
 
-public class linkedListTest {
+import static org.junit.Assert.*;
+
+public class linkedListTest { //Add, Size, Contains, Get, Remove
     @Test
-    public void linkedlistTests(){
+    public void linkedlistTests() {
+        MyList<Integer> lista = new MyLinkedListImpl<>();
+        lista.add(1);
+        lista.add(2);
+        lista.add(3);
+        lista.add(4);
+
+        assertEquals(4, lista.size());
+        assertTrue(lista.contains(3));
+        assertEquals(Integer.valueOf(3),lista.get(2));
+        lista.remove(3);
+        assertFalse(lista.contains(3));
 
     }
 }
