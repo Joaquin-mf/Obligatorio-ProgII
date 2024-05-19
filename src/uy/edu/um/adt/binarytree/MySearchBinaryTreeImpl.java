@@ -14,6 +14,7 @@ public class MySearchBinaryTreeImpl<K extends Comparable<K>, V> implements MySea
 	public void add(K key, V value) {
 		TreeNode<K, V> elementToAdd = new TreeNode<>(key, value);
 
+
 		if (root == null) {
 
 			root = elementToAdd;
