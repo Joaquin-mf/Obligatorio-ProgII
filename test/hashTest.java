@@ -1,3 +1,4 @@
+import exceptions.OutofSize;
 import org.junit.Test;
 import uy.edu.um.adt.hash.MyHashImpl;
 
@@ -5,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 public class hashTest {
     @Test
-    public void hashTest(){
+    public void hashTest() throws OutofSize {
         MyHashImpl<Integer,String> tablaHash = new MyHashImpl<>(13);
         tablaHash.put(13,"Joaquin");
         tablaHash.put(26,"Maria");
