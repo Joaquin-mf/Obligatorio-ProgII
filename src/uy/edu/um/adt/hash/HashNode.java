@@ -6,6 +6,7 @@ public class HashNode <K,T> {
     private K key;
     private T data;
 
+
     public HashNode(K key, T data) {
         this.key = key;
         this.data = data;
