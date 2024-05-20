@@ -2,7 +2,7 @@ import uy.edu.um.adt.linkedlist.MyList;
 import java.time.LocalDate;
 
 public interface MySongStats {
-    public MyList<SpotifySong> Top10(String fecha);
+    public MyList<SpotifySong> Top10(String fecha, String Pais);
 
     public MyList<SpotifySong> Top5inTop50(String fecha);
 
