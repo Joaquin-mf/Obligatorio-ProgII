@@ -3,25 +3,38 @@ import uy.edu.um.adt.linkedlist.MyList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CSVReader {
-    public MyList<SpotifySong> loadCSV(String fileName) { //PREGUNTAR
+    public MyList<SpotifySong> loadCSV(String fileName) {
         MyList<SpotifySong> songs = new MyLinkedListImpl<>();
         String line;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el patrón según el formato de fecha del CSV
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             br.readLine(); // Leer la cabecera (primera línea) y descartarla
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(","); // Dividir la línea en valores separados por comas
+                String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Manejo de comas dentro de comillas
+
+                // Manejo de la columna de artistas
+                String[] artistNames = values[2].split(",");
+                Artists[] artists = new Artists[artistNames.length];
+                for (int i = 0; i < artistNames.length; i++) {
+                    artists[i] = new Artists(artistNames[i].trim());
+                }
+
+                LocalDate snapshotDate = LocalDate.parse(values[7], formatter); // Convertir la fecha de cadena a LocalDate
+
                 SpotifySong song = new SpotifySong(
                         values[0], // spotifyId
                         values[1], // name
-                        values[2], // artists
+                        artists, // artists
                         Integer.parseInt(values[3]), // dailyRank
                         Integer.parseInt(values[4]), // dailyMovement
                         Integer.parseInt(values[5]), // weeklyMovement
                         values[6], // country
-                        values[7], // snapshotDate
+                        snapshotDate, // snapshotDate
                         Integer.parseInt(values[8]), // popularity
                         Boolean.parseBoolean(values[9]), // isExplicit
                         Integer.parseInt(values[10]), // durationMs
@@ -40,7 +53,7 @@ public class CSVReader {
                         Double.parseDouble(values[23]), // tempo
                         Integer.parseInt(values[24]) // timeSignature
                 );
-                songs.add(song); // Añadir el objeto SongEntry a la lista
+                songs.add(song); // Añadir el objeto SpotifySong a la lista
             }
         } catch (IOException e) {
             e.printStackTrace(); // Manejar errores de E/S
@@ -48,4 +61,5 @@ public class CSVReader {
         return songs; // Devolver la lista de canciones
     }
 }
+
 
