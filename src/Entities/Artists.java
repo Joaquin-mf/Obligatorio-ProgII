@@ -1,3 +1,5 @@
+package Entities;
+
 import uy.edu.um.adt.linkedlist.MyList;
 
 public class Artists {

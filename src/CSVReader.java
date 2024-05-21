@@ -1,3 +1,5 @@
+import Entities.Artists;
+import Entities.SpotifySong;
 import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
 import uy.edu.um.adt.linkedlist.MyList;
 import java.io.BufferedReader;
@@ -6,13 +8,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 public class CSVReader {
     public MyList<SpotifySong> loadCSV(String fileName) {
         MyList<SpotifySong> songs = new MyLinkedListImpl<>();
         String line;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el patrón según el formato de fecha del CSV
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Dataset.csv"))) {
             br.readLine(); // Leer la cabecera (primera línea) y descartarla
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Manejo de comas dentro de comillas
@@ -53,7 +56,7 @@ public class CSVReader {
                         Double.parseDouble(values[23]), // tempo
                         Integer.parseInt(values[24]) // timeSignature
                 );
-                songs.add(song); // Añadir el objeto SpotifySong a la lista
+                songs.add(song); // Añadir el objeto Entities.SpotifySong a la lista
             }
         } catch (IOException e) {
             e.printStackTrace(); // Manejar errores de E/S
