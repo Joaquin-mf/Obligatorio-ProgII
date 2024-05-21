@@ -1,7 +1,7 @@
 public class SpotifySong {
     private String spotifyId;
     private String name;
-    private String artists;
+    private Artists[] artists;
     private int dailyRank;
     private int dailyMovement;
     private int weeklyMovement;
@@ -25,7 +25,7 @@ public class SpotifySong {
     private double tempo;
     private int timeSignature;
 
-    public SpotifySong(String spotifyId, String name, String artists, int dailyRank, int dailyMovement, int weeklyMovement, String country, String snapshotDate, int popularity, boolean isExplicit, int durationMs, String albumName, String albumReleaseDate, double danceability, double energy, int key, double loudness, int mode, double speechiness, double acousticness, double instrumentalness, double liveness, double valence, double tempo, int timeSignature) {
+    public SpotifySong(String spotifyId, String name, Artists[] artists, int dailyRank, int dailyMovement, int weeklyMovement, String country, String snapshotDate, int popularity, boolean isExplicit, int durationMs, String albumName, String albumReleaseDate, double danceability, double energy, int key, double loudness, int mode, double speechiness, double acousticness, double instrumentalness, double liveness, double valence, double tempo, int timeSignature) {
         this.spotifyId = spotifyId;
         this.name = name;
         this.artists = artists;

@@ -1,93 +1,102 @@
 package uy.edu.um.adt.hash;
 
 import exceptions.ElementNotFoundException;
-import exceptions.OutofSize;
+import exceptions.reSize;
 
-import java.util.Hashtable;
+public class MyHashImpl<K, T> implements MyHash<K, T> {
+    private HashNode<K, T>[] hashTable;
+    private int capacity;
+    private int size = 0;
+    private static final float loadFactor = 0.70F;
 
-public class MyHashImpl<K,T> implements MyHash<K,T>{
-    private HashNode<K,T>[] hashTable;
-    private int size; //numero primo
-
-    public MyHashImpl(int size) {
-        this.hashTable = new HashNode[size];
-        this.size = size;
+    public MyHashImpl(int capacity) {
+        this.hashTable = new HashNode[capacity];
+        this.capacity = capacity;
+        this.size = 0;
     }
 
     @Override
-    public void put(K key, T value) throws OutofSize {
+    public void put(K key, T value) throws reSize {
+        if (size >= capacity * loadFactor) {
+            reSize();
+        }
+
         int hashCode = key.hashCode();
         int absHashCode = hashCode & Integer.MAX_VALUE; // Operación bit a bit para obtener el valor absoluto
-        int posicion = absHashCode % size;
-        HashNode<K, T> newNode = new HashNode(key, value);
-        int attempts = size;
+        int posicion = absHashCode % capacity;
 
         // Manejo de colisiones mediante sondeo lineal
-        while (hashTable[posicion] != null && !hashTable[posicion].getKey().equals(key) && attempts > 0) {
-            posicion = (posicion + 1) % size;
-            attempts--;
+        while (hashTable[posicion] != null && !hashTable[posicion].getKey().equals(key)) {
+            posicion = (posicion + 1) % capacity;
         }
-        if (attempts ==  0){throw new OutofSize();}
-        hashTable[posicion] = newNode;
+
+        if (hashTable[posicion] == null) {
+            size++;
+        }
+
+        hashTable[posicion] = new HashNode<>(key, value);
     }
 
-    public HashNode<K,T> findNode(K key) {
+    public void reSize() throws reSize {
+        HashNode<K, T>[] oldHash = hashTable;
+        capacity *= 2;
+        hashTable = new HashNode[capacity];
+        size = 0;
+
+        for (HashNode<K, T> node : oldHash) {
+            if (node != null) {
+                put(node.getKey(), node.getData());
+            }
+        }
+    }
+
+    public HashNode<K, T> findNode(K key) {
         int hashCode = key.hashCode();
         int absHashCode = hashCode & Integer.MAX_VALUE; // Operación bit a bit para obtener el valor absoluto
-        int posicion = absHashCode % size;
-        int attempts = size;
+        int posicion = absHashCode % capacity;
+        int attempts = capacity;
 
         while (hashTable[posicion] != null && attempts > 0) {
             if (hashTable[posicion].getKey().equals(key)) {
                 return hashTable[posicion];
             }
-            posicion = (posicion + 1) % size;
+            posicion = (posicion + 1) % capacity;
             attempts--;
         }
         return null;
     }
 
-
     @Override
     public int find(K key) {
         int hashCode = key.hashCode();
         int absHashCode = hashCode & Integer.MAX_VALUE; // Operación bit a bit para obtener el valor absoluto
-        int posicion = absHashCode % size;
-        if(this.contains(key)){
-            while(hashTable[posicion] != null){
-                if(hashTable[posicion].getKey().equals(key)){
-                    return posicion;
-                }
-                posicion = (posicion + 1) % size;
+        int posicion = absHashCode % capacity;
+        int attempts = capacity;
+
+        while (hashTable[posicion] != null && attempts > 0) {
+            if (hashTable[posicion].getKey().equals(key)) {
+                return posicion;
             }
+            posicion = (posicion + 1) % capacity;
+            attempts--;
         }
         return -1;
     }
 
     @Override
     public void remove(K key) throws ElementNotFoundException {
-        int position = this.find(key);
-        if(position != -1) {
-            this.hashTable[position] = null;
-        }else{
+        int position = find(key);
+        if (position != -1) {
+            hashTable[position] = null;
+            size--;
+        } else {
             throw new ElementNotFoundException();
         }
     }
 
     @Override
     public boolean contains(K key) {
-        int hashCode = key.hashCode();
-        int absHashCode = hashCode & Integer.MAX_VALUE; // Operación bit a bit para obtener el valor absoluto
-        int posicion = absHashCode % size;
-        int attempts = size;
-        while(hashTable[posicion] != null  && attempts > 0){
-            if (hashTable[posicion].getKey().equals(key)) {
-                return true;
-            }
-            posicion = (posicion + 1) % size;
-            attempts --;
-        }
-        return false;
+        return find(key) != -1;
     }
 
     public HashNode<K, T>[] getHashTable() {
@@ -105,4 +114,13 @@ public class MyHashImpl<K,T> implements MyHash<K,T>{
     public void setSize(int size) {
         this.size = size;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
 }
+

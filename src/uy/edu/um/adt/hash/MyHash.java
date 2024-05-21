@@ -1,10 +1,10 @@
 package uy.edu.um.adt.hash;
 
 import exceptions.ElementNotFoundException;
-import exceptions.OutofSize;
+import exceptions.reSize;
 
 public interface MyHash <K,T> {
-    void put (K key, T value) throws OutofSize;
+    void put (K key, T value) throws reSize;
     int find(K key);
     void remove(K key) throws ElementNotFoundException;
     boolean contains(K key);
