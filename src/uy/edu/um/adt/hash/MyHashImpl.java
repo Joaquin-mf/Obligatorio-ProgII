@@ -16,7 +16,7 @@ public class MyHashImpl<K, T> implements MyHash<K, T> {
     }
 
     @Override
-    public void put(K key, T value) throws reSize {
+    public void put(K key, T value) {
         if (size >= capacity * loadFactor) {
             reSize();
         }
@@ -37,7 +37,7 @@ public class MyHashImpl<K, T> implements MyHash<K, T> {
         hashTable[posicion] = new HashNode<>(key, value);
     }
 
-    public void reSize() throws reSize {
+    public void reSize() {
         HashNode<K, T>[] oldHash = hashTable;
         capacity *= 2;
         hashTable = new HashNode[capacity];

@@ -4,7 +4,7 @@ import exceptions.ElementNotFoundException;
 import exceptions.reSize;
 
 public interface MyHash <K,T> {
-    void put (K key, T value) throws reSize;
+    void put (K key, T value);
     int find(K key);
     void remove(K key) throws ElementNotFoundException;
     boolean contains(K key);
