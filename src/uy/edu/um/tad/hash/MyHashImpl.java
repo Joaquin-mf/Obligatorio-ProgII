@@ -1,7 +1,6 @@
-package uy.edu.um.adt.hash;
+package uy.edu.um.tad.hash;
 
 import exceptions.ElementNotFoundException;
-import exceptions.reSize;
 
 public class MyHashImpl<K, T> implements MyHash<K, T> {
     private HashNode<K, T>[] hashTable;

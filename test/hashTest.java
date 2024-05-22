@@ -1,6 +1,6 @@
 import exceptions.reSize;
 import org.junit.Test;
-import uy.edu.um.adt.hash.MyHashImpl;
+import uy.edu.um.tad.hash.MyHashImpl;
 
 import static org.junit.Assert.assertEquals;
 

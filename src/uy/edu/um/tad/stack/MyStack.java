@@ -1,4 +1,4 @@
-package uy.edu.um.adt.stack;
+package uy.edu.um.tad.stack;
 
 
 public interface MyStack<T> {
@@ -11,5 +11,5 @@ public interface MyStack<T> {
 	
 	int size();
 
-	T get(int i);
+	boolean isEmpty();
 }

@@ -1,9 +1,6 @@
-import org.junit.Assert;
 import org.junit.Test;
-import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
-import uy.edu.um.adt.linkedlist.MyList;
-import uy.edu.um.adt.queue.EmptyQueueException;
-import uy.edu.um.adt.queue.MyQueue;
+import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
+import uy.edu.um.tad.linkedlist.MyList;
 
 import static org.junit.Assert.*;
 

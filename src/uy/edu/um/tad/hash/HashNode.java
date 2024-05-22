@@ -1,4 +1,4 @@
-package uy.edu.um.adt.hash;
+package uy.edu.um.tad.hash;
 
 import java.util.Objects;
 

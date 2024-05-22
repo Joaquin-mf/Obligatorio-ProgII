@@ -1,10 +1,12 @@
-package uy.edu.um.adt.linkedlist;
+package uy.edu.um.tad.linkedlist;
 
 public class Node<T> {
 
     private T value;
 
     private Node<T> next;
+
+    private int priority;
 
     public Node(T value) {
         this.value = value;
@@ -25,5 +27,13 @@ public class Node<T> {
 
     public void setNext(Node<T> next) {
         this.next = next;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

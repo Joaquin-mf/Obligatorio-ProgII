@@ -1,7 +1,7 @@
 import Entities.Artists;
 import Entities.SpotifySong;
-import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
-import uy.edu.um.adt.linkedlist.MyList;
+import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
+import uy.edu.um.tad.linkedlist.MyList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

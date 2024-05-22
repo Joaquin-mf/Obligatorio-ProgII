@@ -1,7 +1,6 @@
-package uy.edu.um.adt.hash;
+package uy.edu.um.tad.hash;
 
 import exceptions.ElementNotFoundException;
-import exceptions.reSize;
 
 public interface MyHash <K,T> {
     void put (K key, T value);

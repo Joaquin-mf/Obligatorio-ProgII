@@ -1,6 +1,6 @@
 import Entities.Artists;
 import Entities.SpotifySong;
-import uy.edu.um.adt.linkedlist.MyList;
+import uy.edu.um.tad.linkedlist.MyList;
 import java.time.LocalDate;
 
 public interface MySongStats {

@@ -1,8 +1,7 @@
-import com.sun.jdi.IntegerValue;
 import org.junit.Test;
-import uy.edu.um.adt.linkedlist.MyLinkedListImpl;
-import uy.edu.um.adt.stack.EmptyStackException;
-import uy.edu.um.adt.stack.MyStack;
+import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
+import uy.edu.um.tad.stack.EmptyStackException;
+import uy.edu.um.tad.stack.MyStack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -59,13 +58,5 @@ public class stackTest {  // Push,Pop,Peek,size,get
         assertNull(stack.peek());
     }
 
-    @Test
-    public void stackTestGet(){
-        MyStack<Integer> stack = new MyLinkedListImpl<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        assertEquals(Integer.valueOf(1), stack.get(0));
-    }
 }
 

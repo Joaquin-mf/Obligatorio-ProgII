@@ -1,4 +1,4 @@
-package uy.edu.um.adt.linkedlist;
+package uy.edu.um.tad.linkedlist;
 
 public interface MyList<T> {
 
@@ -12,7 +12,7 @@ public interface MyList<T> {
 
     int size();
 
-    Node<T> getPrimero();
+    Node<T> getFirst();
 
-    void recorro_recu(Node<T> primero);
+    boolean isEmpty();
 }

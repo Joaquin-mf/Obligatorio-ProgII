@@ -1,12 +1,14 @@
-package uy.edu.um.adt.linkedlist;
+package uy.edu.um.tad.linkedlist;
 
-import uy.edu.um.adt.queue.EmptyQueueException;
-import uy.edu.um.adt.queue.MyQueue;
-import uy.edu.um.adt.stack.EmptyStackException;
-import uy.edu.um.adt.stack.MyStack;
+
+import uy.edu.um.tad.queue.EmptyQueueException;
+import uy.edu.um.tad.queue.MyQueue;
+import uy.edu.um.tad.stack.EmptyStackException;
+import uy.edu.um.tad.stack.MyStack;
 
 public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
+    //@Getter
     private Node<T> first;
 
     private Node<T> last;
@@ -15,6 +17,7 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         this.first = null;
         this.last = null;
     }
+
 
     @Override
     public void add(T value) {
@@ -63,8 +66,6 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         }
     }
 
-
-    @Override
     public T get(int position) {
         T valueToReturn = null;
         int tempPosition = 0;
@@ -90,7 +91,6 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         return valueToReturn;
     }
 
-    @Override
     public boolean contains(T value) {
         boolean contains = false;
         Node<T> temp = this.first;
@@ -110,7 +110,6 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         return contains;
     }
 
-    @Override
     public void remove(T value) {
         Node<T> beforeSearchValue = null;
         Node<T> searchValue = this.first;
@@ -147,8 +146,8 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
             } else { // resto de los casos
 
-                    beforeSearchValue.setNext(searchValue.getNext());
-                    searchValue.setNext(null);
+                beforeSearchValue.setNext(searchValue.getNext());
+                searchValue.setNext(null);
 
             }
 
@@ -172,7 +171,6 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         return valueToRemove;
     }
 
-    @Override
     public int size() {
         int size = 0;
 
@@ -190,12 +188,10 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
     // Operaciones particulares a Queue
 
-    @Override
     public void enqueue(T value) {
         addToBeginning(value);
     }
 
-    @Override
     public T dequeue() throws EmptyQueueException {
         if (this.last == null) { // si la queue esta vacia
 
@@ -207,12 +203,10 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
     // Operaciones particulares a Stack
 
-    @Override
     public void push(T value) {
         addToTheEnd(value);
     }
 
-    @Override
     public T pop() throws EmptyStackException {
         if (this.last == null) { // si la pila esta vacia
 
@@ -222,7 +216,6 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         return removeLast();
     }
 
-    @Override
     public T peek() {
         T valueToReturn = null;
 
@@ -233,16 +226,11 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         return valueToReturn;
     }
 
-    @Override
-    public Node<T> getPrimero() {
+    public Node<T>  getFirst() {
         return first;
     }
 
-    public void recorro_recu(Node<T> RefNodo){
-        if (RefNodo != null) {
-            T elemento = RefNodo.getValue();
-            System.out.println(elemento + " ");
-            recorro_recu(RefNodo.getNext());
-        }
+    public boolean isEmpty() {
+        return (this.first == null && this.last==null);
     }
 }
