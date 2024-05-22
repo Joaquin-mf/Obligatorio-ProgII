@@ -1,3 +1,5 @@
+package StorageData;
+
 import Entities.Artists;
 import Entities.SpotifySong;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
