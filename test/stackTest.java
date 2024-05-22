@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.stack.EmptyStackException;
@@ -8,34 +9,27 @@ import static org.junit.Assert.assertNull;
 
 public class stackTest {  // Push,Pop,Peek,size,get
 
-
-    @Test
-    public void stackTestSize(){
-        MyStack<Integer> stack = new MyLinkedListImpl<>();
+    MyStack<Integer> stack;
+    @Before
+    public void base(){
+        stack = new MyLinkedListImpl<>();
         stack.push(1);
         stack.push(2);
         stack.push(3);
         stack.push(4);
+    }
+    @Test
+    public void stackTestSize(){
         assertEquals(4, stack.size());
     }
 
     @Test
     public void stackTestPush(){
-        MyStack<Integer> stack = new MyLinkedListImpl<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
         assertEquals(Integer.valueOf(4), stack.peek());
     }
 
     @Test
     public void stackTestPop(){
-        MyStack<Integer> stack = new MyLinkedListImpl<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
         try {
             assertEquals(Integer.valueOf(4), stack.pop());
         } catch (EmptyStackException e) {
@@ -45,17 +39,12 @@ public class stackTest {  // Push,Pop,Peek,size,get
 
     @Test
     public void stackTestPeek1(){
-        MyStack<Integer> stack = new MyLinkedListImpl<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
         assertEquals(Integer.valueOf(4), stack.peek());
     }
     @Test
     public void stackTestPeek2(){
-        MyStack<Integer> stack = new MyLinkedListImpl<>();
-        assertNull(stack.peek());
+        MyStack<Integer> stackVacio = new MyLinkedListImpl<>();
+        assertNull(stackVacio.peek());
     }
 
 }
