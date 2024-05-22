@@ -19,7 +19,6 @@ public class MyHashImpl<K, T> implements MyHash<K, T> {
         if (size >= capacity * loadFactor) {
             reSize();
         }
-
         int hashCode = key.hashCode();
         int absHashCode = hashCode & Integer.MAX_VALUE; // Operación bit a bit para obtener el valor absoluto
         int posicion = absHashCode % capacity;

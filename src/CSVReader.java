@@ -15,7 +15,7 @@ public class CSVReader {
         String line;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el patrón según el formato de fecha del CSV
 
-        try (BufferedReader br = new BufferedReader(new FileReader("Dataset.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("DatasetTEST.csv"))) {
             br.readLine(); // Leer la cabecera (primera línea) y descartarla
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Manejo de comas dentro de comillas
