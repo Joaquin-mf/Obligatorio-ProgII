@@ -9,7 +9,7 @@ import uy.edu.um.tad.linkedlist.MyList;
 import java.time.LocalDate;
 
 public class HashDate {
-    public static MyHash<String, MyList<SpotifySong>> MyHashDate(LocalDate fecha){
+    public static MyHash<String, MyList<SpotifySong>> MyHashDate(){
         CSVReader csvReader = new CSVReader();
         MyHash<String,MyList<SpotifySong>> hashDate = new MyHashImpl<>(113);
         MyList<SpotifySong> songsList = csvReader.loadCSV("DatasetTEST.csv");
