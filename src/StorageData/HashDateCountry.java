@@ -10,13 +10,14 @@ import java.time.LocalDate;
 
 public class HashDateCountry {
 
-    public static MyHash<String, MyList<SpotifySong>> MyHashEjercicio1(LocalDate snapshot, String pais){
+    public static MyHash<String, MyList<SpotifySong>> MyHashDateCountry(LocalDate snapshot, String pais){
         CSVReader csvReader = new CSVReader();
         MyHash<String,MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(113);
         MyList<SpotifySong> songsList = csvReader.loadCSV("DatasetTEST.csv");
         for(int i=0; i< songsList.size(); i++){
             SpotifySong song = songsList.get(i);
             String songKey = generateKey(snapshot,pais);
+
             if(!hashDateCountry.contains(songKey)){
                 hashDateCountry.put(songKey, new MyLinkedListImpl<>());
             }

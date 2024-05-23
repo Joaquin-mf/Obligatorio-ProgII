@@ -56,5 +56,205 @@ public class SpotifySong {
         this.tempo = tempo;
         this.timeSignature = timeSignature;
     }
+
+    public String getSpotifyId() {
+        return spotifyId;
+    }
+
+    public void setSpotifyId(String spotifyId) {
+        this.spotifyId = spotifyId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Artists[] getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Artists[] artists) {
+        this.artists = artists;
+    }
+
+    public int getDailyRank() {
+        return dailyRank;
+    }
+
+    public void setDailyRank(int dailyRank) {
+        this.dailyRank = dailyRank;
+    }
+
+    public int getDailyMovement() {
+        return dailyMovement;
+    }
+
+    public void setDailyMovement(int dailyMovement) {
+        this.dailyMovement = dailyMovement;
+    }
+
+    public int getWeeklyMovement() {
+        return weeklyMovement;
+    }
+
+    public void setWeeklyMovement(int weeklyMovement) {
+        this.weeklyMovement = weeklyMovement;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public LocalDate getSnapshotDate() {
+        return snapshotDate;
+    }
+
+    public void setSnapshotDate(LocalDate snapshotDate) {
+        this.snapshotDate = snapshotDate;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
+    public boolean isExplicit() {
+        return isExplicit;
+    }
+
+    public void setExplicit(boolean explicit) {
+        isExplicit = explicit;
+    }
+
+    public int getDurationMs() {
+        return durationMs;
+    }
+
+    public void setDurationMs(int durationMs) {
+        this.durationMs = durationMs;
+    }
+
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
+    public String getAlbumReleaseDate() {
+        return albumReleaseDate;
+    }
+
+    public void setAlbumReleaseDate(String albumReleaseDate) {
+        this.albumReleaseDate = albumReleaseDate;
+    }
+
+    public double getDanceability() {
+        return danceability;
+    }
+
+    public void setDanceability(double danceability) {
+        this.danceability = danceability;
+    }
+
+    public double getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(double energy) {
+        this.energy = energy;
+    }
+
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public double getLoudness() {
+        return loudness;
+    }
+
+    public void setLoudness(double loudness) {
+        this.loudness = loudness;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public double getSpeechiness() {
+        return speechiness;
+    }
+
+    public void setSpeechiness(double speechiness) {
+        this.speechiness = speechiness;
+    }
+
+    public double getAcousticness() {
+        return acousticness;
+    }
+
+    public void setAcousticness(double acousticness) {
+        this.acousticness = acousticness;
+    }
+
+    public double getInstrumentalness() {
+        return instrumentalness;
+    }
+
+    public void setInstrumentalness(double instrumentalness) {
+        this.instrumentalness = instrumentalness;
+    }
+
+    public double getLiveness() {
+        return liveness;
+    }
+
+    public void setLiveness(double liveness) {
+        this.liveness = liveness;
+    }
+
+    public double getValence() {
+        return valence;
+    }
+
+    public void setValence(double valence) {
+        this.valence = valence;
+    }
+
+    public double getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(double tempo) {
+        this.tempo = tempo;
+    }
+
+    public int getTimeSignature() {
+        return timeSignature;
+    }
+
+    public void setTimeSignature(int timeSignature) {
+        this.timeSignature = timeSignature;
+    }
 }
 
