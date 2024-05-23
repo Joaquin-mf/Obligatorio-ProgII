@@ -4,10 +4,9 @@ import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.stack.EmptyStackException;
 import uy.edu.um.tad.stack.MyStack;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
-public class stackTest {  // Push,Pop,Peek,size,get
+public class stackTest {  // Push,Pop,Peek,size,isEmpty
 
     MyStack<Integer> stack;
     @Before
@@ -46,6 +45,17 @@ public class stackTest {  // Push,Pop,Peek,size,get
         MyStack<Integer> stackVacio = new MyLinkedListImpl<>();
         assertNull(stackVacio.peek());
     }
+    @Test
+    public void stackTestIsEmptyTrue(){
+        MyStack<Integer> stackVacio = new MyLinkedListImpl<>();
+        assertTrue(stackVacio.isEmpty());
+    }
+
+    @Test
+    public void stackTestIsEmptyFalse(){
+        assertFalse(stack.isEmpty());
+    }
+
 
 }
 
