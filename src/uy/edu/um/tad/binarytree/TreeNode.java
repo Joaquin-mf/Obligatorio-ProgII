@@ -141,13 +141,13 @@ public class TreeNode<T extends Comparable<T>> {
 
 		if (left != null) {
 
-			colList.addAll(left.preOrderTraverse());
+			colList.addAll(left.postOrderTraverse());
 
 		}
 
 		if (right != null) {
 
-			colList.addAll(right.preOrderTraverse());
+			colList.addAll(right.postOrderTraverse());
 
 		}
 
