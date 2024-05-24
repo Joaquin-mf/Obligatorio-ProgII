@@ -48,7 +48,7 @@ public class binaryTreeTest { // add, remove, contains, find, inOrder, PostOrder
     }
 
     @Test
-    public void TestPosOrder(){ //agarra mal el elemento de la posicion [0] del array (expected in [0] 15, actual 11)
+    public void TestPosOrder(){
         Integer[] PosOManual = {11,20,15,35,45,40,30};
         Integer[] PosOMetodo = ombu.posOrder().toArray(new Integer[0]);
         assertArrayEquals(PosOManual,PosOMetodo);
