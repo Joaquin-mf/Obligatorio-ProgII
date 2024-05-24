@@ -2,6 +2,7 @@ import exceptions.ElementNotFoundException;
 import exceptions.reSize;
 import org.junit.Test;
 import org.junit.Before;
+import uy.edu.um.tad.hash.HashNode;
 import uy.edu.um.tad.hash.MyHashImpl;
 
 import static org.junit.Assert.*;
@@ -40,7 +41,8 @@ public class hashTest { // put, find, remove, contains, findNode
     }
     @Test
     public void TestFindNode() throws reSize {
-
+        HashNode<Integer,String> nodo = new HashNode<>(43,"Sofia");
+        assertEquals(nodo, tablaHash.findNode(43));
     }
 }
 
