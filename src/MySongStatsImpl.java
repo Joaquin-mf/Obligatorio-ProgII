@@ -1,6 +1,5 @@
 import Entities.Artists;
 import Entities.SpotifySong;
-import StorageData.CSVReader;
 import StorageData.HashDateCountry;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.linkedlist.MyList;
@@ -13,8 +12,17 @@ public class MySongStatsImpl implements MySongStats{
         HashDateCountry clase = new HashDateCountry();
         MyHash<String,MyList<SpotifySong>> myHash = clase.MyHashDateCountry();
         MyList<SpotifySong> songsList = myHash.findNode(fecha.toString()+"_"+Pais).getData();
-        MyList<SpotifySong> Top10;
-        return songsList;
+        MyList<SpotifySong> Top10 = null;
+        int i=0;
+        int cont=0;
+        while (i < songsList.size() && cont<11){
+            if (songsList.get(i).getDailyRank() < 11){
+                Top10.add(songsList.get(i));
+                cont++;
+            }
+            i++;
+        }
+        return Top10;
     }
 
     @Override
