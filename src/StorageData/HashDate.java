@@ -12,7 +12,7 @@ public class HashDate {
     public static MyHash<String, MyList<SpotifySong>> MyHashDate(){
         CSVReader csvReader = new CSVReader();
         MyHash<String,MyList<SpotifySong>> hashDate = new MyHashImpl<>(113);
-        MyList<SpotifySong> songsList = csvReader.loadCSV("DatasetTEST.csv");
+        MyList<SpotifySong> songsList = csvReader.CSVload();
         for(int i = 0; i < songsList.size(); i++){
             SpotifySong song = songsList.get(i);
             String songKey = song.getSnapshotDate().toString();
