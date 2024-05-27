@@ -1,5 +1,8 @@
 import Entities.Artists;
 import Entities.SpotifySong;
+import StorageData.CSVReader;
+import StorageData.HashDateCountry;
+import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.linkedlist.MyList;
 
 import java.time.LocalDate;
@@ -7,7 +10,11 @@ import java.time.LocalDate;
 public class MySongStatsImpl implements MySongStats{
     @Override
     public MyList<SpotifySong> Top10(LocalDate fecha, String Pais) {
-        return null;
+        HashDateCountry clase = new HashDateCountry();
+        MyHash<String,MyList<SpotifySong>> myHash = clase.MyHashDateCountry();
+        MyList<SpotifySong> songsList = myHash.findNode(fecha.toString()+"_"+Pais).getData();
+        MyList<SpotifySong> Top10;
+        return songsList;
     }
 
     @Override

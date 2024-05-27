@@ -9,11 +9,11 @@ import uy.edu.um.tad.linkedlist.MyList;
 import java.time.LocalDate;
 
 public class HashDateCountry {
-
-    public static MyHash<String, MyList<SpotifySong>> MyHashDateCountry(){
+    public MyHash<String, MyList<SpotifySong>> MyHashDateCountry(){
         CSVReader csvReader = new CSVReader();
         MyHash<String,MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(113);
         MyList<SpotifySong> songsList = csvReader.CSVload();
+
         for(int i=0; i< songsList.size(); i++){
             SpotifySong song = songsList.get(i);
             String songKey = generateKey(song.getSnapshotDate(),song.getCountry());
@@ -23,7 +23,7 @@ public class HashDateCountry {
             }
             hashDateCountry.findNode(songKey).getData().add(song);
         }
-        return null;
+        return hashDateCountry;
     }
 
     public static String generateKey(LocalDate date, String country) {
