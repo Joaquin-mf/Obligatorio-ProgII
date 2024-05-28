@@ -12,13 +12,15 @@ import java.time.LocalDate;
 
 public class CSVReader {
     public MyList<SpotifySong> CSVload() {
-        String archivoCSV = "/Users/joaquinmartirena/Desktop/UM 3er Semestre/Programacion_II/Projects/CSVexp/src/DatasetTEST.csv";
+        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/src/DatasetTEST.csv";
 
 
         // Lista para almacenar todas las canciones del CSV
         MyList<SpotifySong> datosCSV = new MyLinkedListImpl<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
+            // Ignorar la primera línea
+            br.readLine();
             String linea;
             while ((linea = br.readLine()) != null) {
                 // Usa el separador para dividir la línea en columnas
@@ -41,9 +43,6 @@ public class CSVReader {
                 for (String nombreArtista : nombresArtistas) {
                     artistas.add(new Artists(nombreArtista));
                 }
-
-
-                System.out.println(columnas[3]);
 
                 // Crea un objeto SpotifySong con los datos de la línea
                 SpotifySong cancion = new SpotifySong(
