@@ -4,7 +4,7 @@ import uy.edu.um.tad.linkedlist.MyList;
 
 import java.time.LocalDate;
 
-public class SpotifySong {
+public class SpotifySong implements Comparable<SpotifySong> {
     private String spotifyId;
     private String name;
     private MyList<Artists> artists;
@@ -257,6 +257,14 @@ public class SpotifySong {
 
     public void setTimeSignature(int timeSignature) {
         this.timeSignature = timeSignature;
+    }
+
+    @Override
+    public int compareTo(SpotifySong spotifySong) {
+        if(dailyRank < spotifySong.getDailyRank()) {return -1;}
+        else if (dailyRank == spotifySong.getDailyRank()) {return 0;}
+        else {return 1;}
+        }
     }
 }
 

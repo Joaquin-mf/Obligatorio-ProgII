@@ -1,10 +1,11 @@
 import Entities.Artists;
 import Entities.SpotifySong;
+import uy.edu.um.tad.binarytree.BinaryTree;
 import uy.edu.um.tad.linkedlist.MyList;
 import java.time.LocalDate;
 
 public interface MySongStats {
-    public MyList<SpotifySong> Top10(LocalDate fecha, String Pais);
+    public BinaryTree<SpotifySong> Top10(LocalDate fecha, String Pais);
 
     public MyList<SpotifySong> Top5inTop50(String fecha);
 

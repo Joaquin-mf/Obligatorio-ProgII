@@ -2,6 +2,7 @@ import Entities.Artists;
 import Entities.SpotifySong;
 import StorageData.CSVReader;
 import StorageData.HashDateCountry;
+import uy.edu.um.tad.binarytree.BinaryTree;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
@@ -26,16 +27,18 @@ public class MySongStatsImpl implements MySongStats{
     }
 
     @Override
-    public MyList<SpotifySong> Top10(LocalDate fecha, String Pais) {
+    public BinaryTree<SpotifySong> Top10(LocalDate fecha, String Pais) {
         HashDateCountry clase = new HashDateCountry();
         CSVReader myReader = new CSVReader();
         MyHash<String,MyList<SpotifySong>> myHash = clase.MyHashDateCountry(mySongs);
         MyList<SpotifySong> songsList = myHash.findNode(fecha.toString()+"_"+Pais).getData();
-        MyList<SpotifySong> Top10 = null;
+        BinaryTree<SpotifySong> Top10 = null;
         int i=0;
-        while (i < songsList.size() && Top10.size() < 10){
+        int iter = 0;
+        while (i < songsList.size() &&  iter < 11){
             if (songsList.get(i).getDailyRank() < 11){
                 Top10.add(songsList.get(i));
+                iter++;
             }
             i++;
         }

@@ -1,5 +1,6 @@
 import Entities.SpotifySong;
 import StorageData.CSVReader;
+import uy.edu.um.tad.binarytree.BinaryTree;
 import uy.edu.um.tad.linkedlist.MyList;
 
 import java.time.LocalDate;
@@ -13,8 +14,7 @@ public class Pruebas {
 //        System.out.println(lista.get(0).getArtists().get(0).getName());
         MySongStats pruebas = new MySongStatsImpl();
         LocalDate fecha = LocalDate.of(2024,05,13);
-        MyList<SpotifySong> tpo10 = pruebas.Top10(fecha,"ZA");
-        System.out.println(tpo10.size());
+        BinaryTree<SpotifySong> tpo10 = pruebas.Top10(fecha,"ZA");
 
 
     }
