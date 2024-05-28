@@ -1,6 +1,7 @@
 import Entities.Artists;
 import Entities.SpotifySong;
 import StorageData.CSVReader;
+import StorageData.HashDate;
 import StorageData.HashDateCountry;
 import uy.edu.um.tad.binarytree.BinaryTree;
 import uy.edu.um.tad.hash.MyHash;
@@ -28,9 +29,7 @@ public class MySongStatsImpl implements MySongStats{
 
     @Override
     public BinaryTree<SpotifySong> Top10(LocalDate fecha, String Pais) {
-        HashDateCountry clase = new HashDateCountry();
-        CSVReader myReader = new CSVReader();
-        MyHash<String,MyList<SpotifySong>> myHash = clase.MyHashDateCountry(mySongs);
+        MyHash<String,MyList<SpotifySong>> myHash = HashDateCountry.MyHashDateCountry(mySongs);
         MyList<SpotifySong> songsList = myHash.findNode(fecha.toString()+"_"+Pais).getData();
         BinaryTree<SpotifySong> Top10 = null;
         int i=0;
@@ -46,7 +45,14 @@ public class MySongStatsImpl implements MySongStats{
     }
 
     @Override
-    public MyList<SpotifySong> Top5inTop50(String fecha) {
+    public MyList<SpotifySong> Top5inTop50(LocalDate fecha) {
+        CSVReader myReader = new CSVReader();
+        MyHash<String,MyList<SpotifySong>> myHash = HashDate.MyHashDate(mySongs);
+        if (myHash != null) {
+            MyList<SpotifySong> songsDate = myHash.findNode(fecha.toString()).getData();
+        }
+
+
 
         return null;
     }
@@ -80,12 +86,12 @@ public class MySongStatsImpl implements MySongStats{
 
 
 
-
         return null;
     }
 
     @Override
-    public int OccurrenciesArtistinTop50(Artists artista) {
+    public int OccurrenciesArtistinTop50(Artists artista, LocalDate fecha) {
+
         return 0;
     }
 

@@ -5,12 +5,10 @@ import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.linkedlist.MyList;
-
 import java.time.LocalDate;
 
 public class HashDateCountry {
-    public MyHash<String, MyList<SpotifySong>> MyHashDateCountry(MyList<SpotifySong> songsList){
-        CSVReader csvReader = new CSVReader();
+    public static MyHash<String, MyList<SpotifySong>> MyHashDateCountry(MyList<SpotifySong> songsList){
         MyHash<String,MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(113);
 
         for(int i=0; i< songsList.size(); i++){

@@ -9,10 +9,8 @@ import uy.edu.um.tad.linkedlist.MyList;
 import java.time.LocalDate;
 
 public class HashDate {
-    public static MyHash<String, MyList<SpotifySong>> MyHashDate(){
-        CSVReader csvReader = new CSVReader();
+    public static MyHash<String, MyList<SpotifySong>> MyHashDate(MyList<SpotifySong> songsList){
         MyHash<String,MyList<SpotifySong>> hashDate = new MyHashImpl<>(113);
-        MyList<SpotifySong> songsList = csvReader.CSVload();
         for(int i = 0; i < songsList.size(); i++){
             SpotifySong song = songsList.get(i);
             String songKey = song.getSnapshotDate().toString();

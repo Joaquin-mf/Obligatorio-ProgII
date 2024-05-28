@@ -263,8 +263,7 @@ public class SpotifySong implements Comparable<SpotifySong> {
     public int compareTo(SpotifySong spotifySong) {
         if(dailyRank < spotifySong.getDailyRank()) {return -1;}
         else if (dailyRank == spotifySong.getDailyRank()) {return 0;}
-        else {return 1;}
-        }
+        return 1;
     }
 }
 
