@@ -1,9 +1,12 @@
+import DataStructures.HashArtistDate;
 import Entities.Artists;
 import Entities.SpotifySong;
 import DataStructures.CSVReader;
 import DataStructures.HashDate;
 import DataStructures.HashDateCountry;
 import uy.edu.um.tad.binarytree.BinaryTree;
+import uy.edu.um.tad.binarytree.SearchBinaryTreeImpl;
+import uy.edu.um.tad.hash.HashNode;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
@@ -13,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class MySongStatsImpl implements MySongStats{
-    public MyList<SpotifySong> mySongs;
+    private MyList<SpotifySong> mySongs;
 
     public MyList<SpotifySong> getMySongs() {
         return mySongs;
@@ -27,6 +30,8 @@ public class MySongStatsImpl implements MySongStats{
         CSVReader lector = new CSVReader();
         this.mySongs = lector.CSVload();
     }
+
+
 
     @Override
     public List<SpotifySong> Top10(LocalDate fecha, String Pais) {
@@ -66,14 +71,14 @@ public class MySongStatsImpl implements MySongStats{
         //filtro segun el rango de fechas
         MyList<SpotifySong> songs = new MyLinkedListImpl<>();
         for(int i=0; i < mySongs.size(); i++){
-            if((!(mySongs.get(i).getSnapshotDate().isBefore(fechaInicio)) && mySongs.get(i).getSnapshotDate().isBefore(fechaFin)) && (mySongs.get(i).getDailyRank() < 50)){
+            if((!(mySongs.get(i).getSnapshotDate().isBefore(fechaInicio)) && mySongs.get(i).getSnapshotDate().isBefore(fechaFin)) && (mySongs.get(i).getDailyRank() <= 50)){
                 songs.add(mySongs.get(i));
             }
         }
 
         MyHash<String,Artists> artistasCount = new MyHashImpl<>(113);
-        for(int i=0; i < mySongs.size(); i++) {
-            MyList<Artists> artist = mySongs.get(i).getArtists();
+        for(int i=0; i < songs.size(); i++) {
+            MyList<Artists> artist = songs.get(i).getArtists();
 
             for (int k = 0; k < artist.size(); k++){
                 String name = artist.get(k).getName();
@@ -86,9 +91,7 @@ public class MySongStatsImpl implements MySongStats{
                 }
             }
         }
-
-
-
+        MyList<Artists> tabla = artistasCount.values();
 
 
 
@@ -97,12 +100,25 @@ public class MySongStatsImpl implements MySongStats{
 
     @Override
     public int OccurrenciesArtistinTop50(Artists artista, LocalDate fecha) {
-
-        return 0;
+        MyHash<String,MyList<SpotifySong>> hash = HashArtistDate.MyHashArtistDate(mySongs);
+        MyList<SpotifySong> songs = hash.findNode(fecha.toString()+"_"+artista.getName()).getData();
+        int contador = 0;
+        for (int i=0; i<songs.size(); i++){
+            SpotifySong song = songs.get(i);
+            if (song.getDailyRank() <= 50){contador++;}
+        }
+        return contador;
     }
 
     @Override
     public int SongsbetweenTempoAndDate(int TempoMax, int TempoMin, LocalDate fechaInicio, LocalDate fechaFin) {
-        return 0;
+        int contador = 0;
+        for(int i=0; i<mySongs.size(); i++){
+            SpotifySong song = mySongs.get(i);
+            if((song.getTempo()<TempoMax && song.getTempo()>TempoMin) && (song.getSnapshotDate().isBefore(fechaFin) && song.getSnapshotDate().isAfter(fechaFin))){
+                contador++;
+            }
+        }
+        return contador;
     }
 }

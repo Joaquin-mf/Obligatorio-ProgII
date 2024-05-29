@@ -27,12 +27,12 @@ public class CSVReader {
 
                 linea = linea.replaceAll(", ","Ω");
                 //Manejo de canciones problematicas
-                linea = linea.replaceAll("Dear My Friend,","Dear My Friend∂");
+                linea = linea.replaceAll("Dear My Friend,","Dear My Friend");
                 linea = linea.replaceAll("Ya no me duele :,\\)","Ya no me duele :)");
                 linea = linea.replaceAll(",", "∆");
                 //Manejo de canciones problematicas
                 linea = linea.replaceAll("Ya no me duele :\\)","Ya no me duele :,)");
-                linea = linea.replaceAll("Dear My Friend∂","Dear My Friend,");
+                linea = linea.replaceAll("Dear My Friend","Dear My Friend,");
 
                 linea = linea.replaceAll("[\";]","");
                 String[] columnas = linea.split("∆");
@@ -41,7 +41,7 @@ public class CSVReader {
                 MyList<Artists> artistas = new MyLinkedListImpl<>();
                 String[] nombresArtistas = columnas[2].split("Ω"); // Suponiendo que los artistas están separados por coma
                 for (String nombreArtista : nombresArtistas) {
-                    artistas.add(new Artists(nombreArtista));
+                    artistas.add(new Artists(nombreArtista)); //RAROOOOO
                 }
 
                 // Crea un objeto SpotifySong con los datos de la línea

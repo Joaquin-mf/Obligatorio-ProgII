@@ -14,7 +14,6 @@ public class HashArtistDate {
         MyHash<String, MyList<SpotifySong>> hash = new MyHashImpl<>(113);
         for (int i = 0; i < songsList.size(); i++) {
             SpotifySong song = songsList.get(i);
-            LocalDate dia = song.getSnapshotDate();
             for (int j = 0; j < song.getArtists().size(); j++) {
                 Artists persona = song.getArtists().get(j);
                 String songKey = song.getSnapshotDate().toString() + "_" + persona.getName();

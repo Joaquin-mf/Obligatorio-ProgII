@@ -1,6 +1,6 @@
 package Entities;
 
-public class Artists {
+public class Artists implements Comparable<Artists> {
     private String name;
     private int rank;
 
@@ -8,6 +8,16 @@ public class Artists {
         this.name = name;
         this.rank = 0;
     }
+
+    @Override
+    public int compareTo(Artists artists) {
+        if (artists == null) {
+            throw new NullPointerException("The argument 'artists' is null");
+        }
+        return Integer.compare(this.rank, artists.getRank());
+    }
+
+
 
     public int getRank() {
         return rank;
