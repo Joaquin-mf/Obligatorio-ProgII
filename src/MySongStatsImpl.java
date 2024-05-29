@@ -1,8 +1,8 @@
 import Entities.Artists;
 import Entities.SpotifySong;
-import StorageData.CSVReader;
-import StorageData.HashDate;
-import StorageData.HashDateCountry;
+import DataStructures.CSVReader;
+import DataStructures.HashDate;
+import DataStructures.HashDateCountry;
 import uy.edu.um.tad.binarytree.BinaryTree;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
@@ -10,6 +10,7 @@ import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.linkedlist.MyList;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class MySongStatsImpl implements MySongStats{
     public MyList<SpotifySong> mySongs;
@@ -28,7 +29,7 @@ public class MySongStatsImpl implements MySongStats{
     }
 
     @Override
-    public BinaryTree<SpotifySong> Top10(LocalDate fecha, String Pais) {
+    public List<SpotifySong> Top10(LocalDate fecha, String Pais) {
         MyHash<String,MyList<SpotifySong>> myHash = HashDateCountry.MyHashDateCountry(mySongs);
         MyList<SpotifySong> songsList = myHash.findNode(fecha.toString()+"_"+Pais).getData();
         BinaryTree<SpotifySong> Top10 = null;
@@ -41,7 +42,8 @@ public class MySongStatsImpl implements MySongStats{
             }
             i++;
         }
-        return Top10;
+        List<SpotifySong> ans = Top10.inOrder();
+        return ans;
     }
 
     @Override
@@ -68,17 +70,21 @@ public class MySongStatsImpl implements MySongStats{
                 songs.add(mySongs.get(i));
             }
         }
-        MyHash<String,Integer> artistasCount = new MyHashImpl<>(113);
+
+        MyHash<String,Artists> artistasCount = new MyHashImpl<>(113);
         for(int i=0; i < mySongs.size(); i++) {
             MyList<Artists> artist = mySongs.get(i).getArtists();
-            int k;
-            for (k = 0; k < artist.size(); k++) ;
-            String name = artist.get(k).getName();
-            if(artistasCount.contains(name)){
-                Integer ocurrencias = artistasCount.findNode(name).getData();
-                artistasCount.findNode(name).setData(ocurrencias + 1);
+
+            for (int k = 0; k < artist.size(); k++){
+                String name = artist.get(k).getName();
+                if (artistasCount.contains(name)) {
+                    int ocurrencias = artistasCount.findNode(name).getData().getRank();
+                    artistasCount.findNode(name).getData().setRank(ocurrencias + 1);
+                }else{
+                    artist.get(k).setRank(1);
+                    artistasCount.put(name,artist.get(k));
+                }
             }
-            artistasCount.put(name,1);
         }
 
 

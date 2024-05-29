@@ -1,4 +1,4 @@
-package StorageData;
+package DataStructures;
 
 import Entities.Artists;
 import Entities.SpotifySong;

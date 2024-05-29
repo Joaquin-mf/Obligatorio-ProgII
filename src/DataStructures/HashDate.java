@@ -1,12 +1,10 @@
-package StorageData;
+package DataStructures;
 
 import Entities.SpotifySong;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.linkedlist.MyList;
-
-import java.time.LocalDate;
 
 public class HashDate {
     public static MyHash<String, MyList<SpotifySong>> MyHashDate(MyList<SpotifySong> songsList){

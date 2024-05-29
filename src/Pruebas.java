@@ -1,10 +1,7 @@
 import Entities.SpotifySong;
-import StorageData.CSVReader;
 import uy.edu.um.tad.binarytree.BinaryTree;
-import uy.edu.um.tad.linkedlist.MyList;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Pruebas {
     public static void main(String[] args) {

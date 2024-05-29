@@ -1,4 +1,4 @@
-package StorageData;
+package DataStructures;
 
 import Entities.SpotifySong;
 import uy.edu.um.tad.hash.MyHash;
