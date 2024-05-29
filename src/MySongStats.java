@@ -12,7 +12,7 @@ public interface MySongStats {
 
     public MyList<Artists> Top7inTop50(LocalDate fechaInicio, LocalDate fechaFin);
 
-    public int OccurrenciesArtistinTop50(Artists artista, LocalDate fecha);
+    public int OccurrenciesArtistinTop50(String name, LocalDate fecha);
 
     public int SongsbetweenTempoAndDate(int TempoMax, int TempoMin, LocalDate fechaInicio, LocalDate fechaFin);
 

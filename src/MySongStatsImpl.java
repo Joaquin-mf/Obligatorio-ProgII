@@ -99,9 +99,26 @@ public class MySongStatsImpl implements MySongStats{
     }
 
     @Override
-    public int OccurrenciesArtistinTop50(Artists artista, LocalDate fecha) {
+    public int OccurrenciesArtistinTop50(String name, LocalDate fecha) {
         MyHash<String,MyList<SpotifySong>> hash = HashArtistDate.MyHashArtistDate(mySongs);
-        MyList<SpotifySong> songs = hash.findNode(fecha.toString()+"_"+artista.getName()).getData();
+        MyList<SpotifySong> songs = hash.findNode(fecha.toString()+"_"+name).getData();
+
+
+//        MyList<SpotifySong> songs = new MyLinkedListImpl<>();
+//
+//        for(int i=0; i<mySongs.size(); i++){
+//            SpotifySong song = mySongs.get(i);
+//            if(song.getSnapshotDate().equals(fecha)){
+//                for(int j=0; j<song.getArtists().size();j++){
+//                    if(song.getArtists().get(j).getName().equals(name)){
+//                        songs.add(song);
+//                    }
+//                }
+//            }
+//        }
+//
+//        System.out.println(songs.size());
+
         int contador = 0;
         for (int i=0; i<songs.size(); i++){
             SpotifySong song = songs.get(i);

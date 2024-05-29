@@ -4,6 +4,7 @@ import uy.edu.um.tad.binarytree.BinaryTree;
 import uy.edu.um.tad.linkedlist.MyList;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Pruebas {
     public static void main(String[] args) {
@@ -17,6 +18,8 @@ public class Pruebas {
 
         MySongStatsImpl prueba = new MySongStatsImpl();
         System.out.println(prueba.getMySongs().get(108).getArtists().get(0).getName());
-
+        LocalDate fecha = LocalDate.of(2024,05,13);
+        int nro = prueba.OccurrenciesArtistinTop50("Tommy Richman",fecha);
+        System.out.println(nro);
     }
 }
