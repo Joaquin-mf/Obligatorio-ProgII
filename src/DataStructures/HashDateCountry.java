@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class HashDateCountry {
     public static MyHash<String, MyList<SpotifySong>> MyHashDateCountry(MyList<SpotifySong> songsList){
-        MyHash<String,MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(113);
+        MyHash<String,MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(111113);
 
         for(int i=0; i< songsList.size(); i++){
             SpotifySong song = songsList.get(i);

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MySongStats {
-    public List<SpotifySong> Top10(LocalDate fecha, String Pais);
+    public MyList<SpotifySong> Top10(LocalDate fecha, String Pais);
 
     public MyList<SpotifySong> Top5inTop50(LocalDate fecha);
 

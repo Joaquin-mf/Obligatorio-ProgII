@@ -14,7 +14,6 @@ public class CSVReader {
     public MyList<SpotifySong> CSVload() {
         String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/src/DatasetTEST.csv";
 
-
         // Lista para almacenar todas las canciones del CSV
         MyList<SpotifySong> datosCSV = new MyLinkedListImpl<>();
 
@@ -75,6 +74,7 @@ public class CSVReader {
 
                 // Agrega la canción a la lista principal
                 datosCSV.add(cancion);
+
             }
         } catch (IOException e) {
             e.printStackTrace();

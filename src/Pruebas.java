@@ -4,6 +4,7 @@ import uy.edu.um.tad.binarytree.BinaryTree;
 import uy.edu.um.tad.linkedlist.MyList;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Pruebas {
@@ -17,9 +18,15 @@ public class Pruebas {
 //        BinaryTree<SpotifySong> tpo10 = pruebas.Top10(fecha,"ZA");
 
         MySongStatsImpl prueba = new MySongStatsImpl();
-        System.out.println(prueba.getMySongs().get(108).getArtists().get(0).getName());
+
         LocalDate fecha = LocalDate.of(2024,05,13);
-        int nro = prueba.OccurrenciesArtistinTop50("Tommy Richman",fecha);
-        System.out.println(nro);
+//        int nro = prueba.OccurrenciesArtistinTop50("Tommy Richman",fecha);
+//        System.out.println(nro);
+
+        long st = System.nanoTime();
+        MyList<SpotifySong> lista = prueba.Top10(fecha,"ZA");
+        long fin = System.nanoTime();
+
+        System.out.println((fin-st)/1000000000);
     }
 }

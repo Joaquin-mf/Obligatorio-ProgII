@@ -11,10 +11,13 @@ import java.util.List;
  * @param <T>
  *
  */
-public class SearchBinaryTreeImpl<T extends Comparable<T>> implements
-		BinaryTree<T> {
+public class SearchBinaryTreeImpl<T extends Comparable<T>> implements BinaryTree<T> {
 
 	private TreeNode<T> root;
+
+	public SearchBinaryTreeImpl() {
+		this.root = null;
+	}
 
 	public void add(T oElement) {
 		TreeNode<T> oElementToAdd = new TreeNode<T>(oElement);
