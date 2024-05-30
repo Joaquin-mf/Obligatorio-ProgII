@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.Objects;
+
 public class Artists implements Comparable<Artists> {
     private String name;
     private int rank;
@@ -17,6 +19,13 @@ public class Artists implements Comparable<Artists> {
         return Integer.compare(this.rank, artists.getRank());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artists artists = (Artists) o;
+        return Objects.equals(name, artists.name);
+    }
 
 
     public int getRank() {

@@ -140,12 +140,14 @@ public class MySongStatsImpl implements MySongStats {
 
         //manejo del rango de fechas
         while(!current.equals(fechaFin.plusDays(1))){
-            MyList<SpotifySong> listaHash = hashDate.findNode(fechaInicio.toString()).getData();
+            MyList<SpotifySong> listaHash = hashDate.findNode(current.toString()).getData();
             for(int i=0; i<listaHash.size();i++){
                 MyList<Artists> listaArtista = listaHash.get(i).getArtists();
                 for(int j=0; j<listaArtista.size();j++){
-                    if(!lista.contains(listaArtista.get(j))){
-
+                    Artists artist = listaArtista.get(j);
+                    if(!lista.contains(artist)){
+                        artist.setRank(1);
+                        lista.add(listaArtista.get(j));
                     }
                 }
             }
@@ -209,14 +211,17 @@ public class MySongStatsImpl implements MySongStats {
 
     @Override
     public int SongsbetweenTempoAndDate(int TempoMax, int TempoMin, LocalDate fechaInicio, LocalDate fechaFin) {
-        int contador = 0;
-//        for(int i=0; i<mySongs.size(); i++){
-//            SpotifySong song = mySongs.get(i);
-//            if((song.getTempo()<TempoMax && song.getTempo()>TempoMin) && (song.getSnapshotDate().isBefore(fechaFin) && song.getSnapshotDate().isAfter(fechaFin))){
-//                contador++;
-//            }
-//        }
-        return contador;
+        LocalDate current = fechaFin;
+        MyList<SpotifySong> lista = new MyLinkedListImpl<>();
+        while(!current.equals(fechaFin.plusDays(1))){
+            MyList<SpotifySong> listaSongs = hashDate.findNode(current.toString()).getData();
+            for(int i=0; i<listaSongs.size();i++){
+                if(listaSongs.get(i).getTempo()<TempoMax && listaSongs.get(i).getTempo()<TempoMin){
+                    lista.add(listaSongs.get(i));
+                }
+            }
+        }
+        return lista.size();
     }
 
 
