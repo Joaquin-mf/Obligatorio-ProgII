@@ -199,14 +199,8 @@ public class MySongStatsImpl implements MySongStats {
 //
 //        System.out.println(songs.size());
 
-        int contador = 0;
-        for (int i = 0; i < songs.size(); i++) {
-            SpotifySong song = songs.get(i);
-            if (song.getDailyRank() <= 50) {
-                contador++;
-            }
-        }
-        return contador;
+
+        return songs.size();
     }
 
     @Override
