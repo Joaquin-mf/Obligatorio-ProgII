@@ -16,9 +16,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Scanner;
 
-public class MySongStatsImpl implements MySongStats{
+public class MySongStatsImpl implements MySongStats {
     private MyHash<String, MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(113);
     private MyHash<String, MyList<SpotifySong>> hashDate = new MyHashImpl<>(113);
     private MyHash<String, MyList<SpotifySong>> hashArtistDate = new MyHashImpl<>(113);
@@ -34,16 +37,16 @@ public class MySongStatsImpl implements MySongStats{
             while ((linea = br.readLine()) != null) {
                 // Usa el separador para dividir la línea en columnas
 
-                linea = linea.replaceAll(", ","Ω");
+                linea = linea.replaceAll(", ", "Ω");
                 //Manejo de canciones problematicas
-                linea = linea.replaceAll("Dear My Friend,","Dear My Friend");
-                linea = linea.replaceAll("Ya no me duele :,\\)","Ya no me duele :)");
+                linea = linea.replaceAll("Dear My Friend,", "Dear My Friend");
+                linea = linea.replaceAll("Ya no me duele :,\\)", "Ya no me duele :)");
                 linea = linea.replaceAll(",", "∆");
                 //Manejo de canciones problematicas
-                linea = linea.replaceAll("Ya no me duele :\\)","Ya no me duele :,)");
-                linea = linea.replaceAll("Dear My Friend","Dear My Friend,");
+                linea = linea.replaceAll("Ya no me duele :\\)", "Ya no me duele :,)");
+                linea = linea.replaceAll("Dear My Friend", "Dear My Friend,");
 
-                linea = linea.replaceAll("[\";]","");
+                linea = linea.replaceAll("[\";]", "");
                 String[] columnas = linea.split("∆");
 
                 // Crear lista de artistas a partir de los datos
@@ -83,17 +86,23 @@ public class MySongStatsImpl implements MySongStats{
                 );
 
                 // Agrega la canción a las Estructuras
-                String key1 = cancion.getSnapshotDate().toString()+"_"+cancion.getCountry();
-                if (!hashDateCountry.contains(key1)){hashDateCountry.put(key1,new MyLinkedListImpl<>());}
+                String key1 = cancion.getSnapshotDate().toString() + "_" + cancion.getCountry();
+                if (!hashDateCountry.contains(key1)) {
+                    hashDateCountry.put(key1, new MyLinkedListImpl<>());
+                }
                 hashDateCountry.findNode(key1).getData().add(cancion);
 
                 String key2 = cancion.getSnapshotDate().toString();
-                if(!hashDate.contains(key2)){hashDate.put(key2,new MyLinkedListImpl<>());}
+                if (!hashDate.contains(key2)) {
+                    hashDate.put(key2, new MyLinkedListImpl<>());
+                }
                 hashDate.findNode(key2).getData().add(cancion);
 
-                for(int i=0; i<artistas.size();i++) {
+                for (int i = 0; i < artistas.size(); i++) {
                     String key3 = cancion.getSnapshotDate().toString() + "_" + cancion.getArtists().get(i).getName();
-                    if (!hashArtistDate.contains(key3)){hashArtistDate.put(key3,new MyLinkedListImpl<>());}
+                    if (!hashArtistDate.contains(key3)) {
+                        hashArtistDate.put(key3, new MyLinkedListImpl<>());
+                    }
                     hashArtistDate.findNode(key3).getData().add(cancion);
                 }
             }
@@ -106,11 +115,11 @@ public class MySongStatsImpl implements MySongStats{
     @Override
     public MyList<SpotifySong> Top10(LocalDate fecha, String Pais) {
 
-        MyList<SpotifySong> songsList = hashDateCountry.findNode(fecha.toString()+"_"+Pais).getData();
+        MyList<SpotifySong> songsList = hashDateCountry.findNode(fecha.toString() + "_" + Pais).getData();
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
-        for(int i=0; i<=10; i++){
+        for (int i = 0; i <= 10; i++) {
             lista.add(songsList.get(i));
-            System.out.println(songsList.get(i).getName()+ "  "+songsList.get(i).getDailyRank());
+            System.out.println(songsList.get(i).getName() + "  " + songsList.get(i).getDailyRank());
         }
         return lista;
     }
@@ -158,7 +167,7 @@ public class MySongStatsImpl implements MySongStats{
     @Override
     public int OccurrenciesArtistinTop50(String name, LocalDate fecha) {
 
-        MyList<SpotifySong> songs = hashArtistDate.findNode(fecha.toString()+"_"+name).getData();
+        MyList<SpotifySong> songs = hashArtistDate.findNode(fecha.toString() + "_" + name).getData();
 
 // TESTEO DE FUNCION
 //        MyList<SpotifySong> songs = new MyLinkedListImpl<>();
@@ -177,9 +186,11 @@ public class MySongStatsImpl implements MySongStats{
 //        System.out.println(songs.size());
 
         int contador = 0;
-        for (int i=0; i<songs.size(); i++){
+        for (int i = 0; i < songs.size(); i++) {
             SpotifySong song = songs.get(i);
-            if (song.getDailyRank() <= 50){contador++;}
+            if (song.getDailyRank() <= 50) {
+                contador++;
+            }
         }
         return contador;
     }
@@ -195,4 +206,62 @@ public class MySongStatsImpl implements MySongStats{
 //        }
         return contador;
     }
+
+
+    public void menu() {
+        Scanner scanner = new Scanner(System.in);
+        boolean flag = false;
+        while (flag == false) {
+            System.out.println("Elija una funcion: \n1)Top 10 canciones en un país en tal día. \n2)Top 5 canciones que aparecen en más top 50 en un día dado. \n3)Top 7 artistas que más aparecen en el top 50 para un rango de fechas dado. \n4)cantidad de veces que aparece un artista en el top 50 en una fecha dada. \n5)cantidad de canciones con un tempo en un rango especifico para un rango especifico de fechas");
+            int numero = scanner.nextInt();
+            if (numero==1){
+
+                flag = true;
+            }else if(numero==2){
+                flag = true;
+            }else if(numero==3){
+                flag = true;
+            }else if(numero==4){
+                flag = true;
+            }else if(numero==5){
+                System.out.println("ingrese el tiempo máximo");
+                int TempoMax = scanner.nextInt();
+                System.out.println("ingrese el tiempo mínimo");
+                int TempoMin = scanner.nextInt();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate fechaInicio = null;
+                boolean fechaValida = false;
+                while (!fechaValida) {
+                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
+                    String fechaInicioStr = scanner.nextLine();
+
+                    try {
+                        fechaInicio = LocalDate.parse(fechaInicioStr, formatter);
+                        fechaValida = true;
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
+                    }
+                }
+                LocalDate fechaFin = null;
+                boolean fechaValida2 = false;
+                while (!fechaValida2) {
+                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
+                    String fechaFinStr = scanner.nextLine();
+
+                    try {
+                        fechaFin = LocalDate.parse(fechaFinStr, formatter);
+                        fechaValida2 = true;
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
+                    }
+                }
+                SongsbetweenTempoAndDate(TempoMax, TempoMin, fechaInicio, fechaFin);
+                flag = true;
+            }else{
+                System.out.println("elija un numero entre 1 y 5");
+            }
+        }
+        scanner.close();
+    }
+
 }
