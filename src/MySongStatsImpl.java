@@ -42,6 +42,7 @@ public class MySongStatsImpl implements MySongStats {
                 linea = linea.replaceAll("Dear My Friend,", "Dear My Friend");
                 linea = linea.replaceAll("Ya no me duele :,\\)", "Ya no me duele :)");
                 linea = linea.replaceAll(",", "∆");
+                linea = linea.replaceAll("Ω", ", ");
                 //Manejo de canciones problematicas
                 linea = linea.replaceAll("Ya no me duele :\\)", "Ya no me duele :,)");
                 linea = linea.replaceAll("Dear My Friend", "Dear My Friend,");
@@ -51,7 +52,7 @@ public class MySongStatsImpl implements MySongStats {
 
                 // Crear lista de artistas a partir de los datos
                 MyList<Artists> artistas = new MyLinkedListImpl<>();
-                String[] nombresArtistas = columnas[2].split("Ω"); // Suponiendo que los artistas están separados por coma
+                String[] nombresArtistas = columnas[2].split(", "); // Suponiendo que los artistas están separados por coma
                 for (String nombreArtista : nombresArtistas) {
                     artistas.add(new Artists(nombreArtista)); //RAROOOOO
                 }
@@ -117,9 +118,10 @@ public class MySongStatsImpl implements MySongStats {
 
         MyList<SpotifySong> songsList = hashDateCountry.findNode(fecha.toString() + "_" + Pais).getData();
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
-        for (int i = 0; i <= 10; i++) {
+        System.out.println("El top 10 del "+fecha.toString()+" en "+Pais+":\n");
+        for (int i = 0; i <= 9; i++) {
             lista.add(songsList.get(i));
-            System.out.println(songsList.get(i).getName() + "  " + songsList.get(i).getDailyRank());
+            System.out.println(songsList.get(i).getName() + " tiene el rank: " + songsList.get(i).getDailyRank());
         }
         return lista;
     }
@@ -133,15 +135,25 @@ public class MySongStatsImpl implements MySongStats {
 
     @Override
     public MyList<Artists> Top7inTop50(LocalDate fechaInicio, LocalDate fechaFin) {
-//
-//        //filtro segun el rango de fechas
-//        MyList<SpotifySong> songs = new MyLinkedListImpl<>();
-//        for(int i=0; i < mySongs.size(); i++){
-//            if((!(mySongs.get(i).getSnapshotDate().isBefore(fechaInicio)) && mySongs.get(i).getSnapshotDate().isBefore(fechaFin)) && (mySongs.get(i).getDailyRank() <= 50)){
-//                songs.add(mySongs.get(i));
-//            }
-//        }
-//
+        LocalDate current = fechaFin;
+        MyList<Artists> lista = new MyLinkedListImpl<>();
+
+        //manejo del rango de fechas
+        while(!current.equals(fechaFin.plusDays(1))){
+            MyList<SpotifySong> listaHash = hashDate.findNode(fechaInicio.toString()).getData();
+            for(int i=0; i<listaHash.size();i++){
+                MyList<Artists> listaArtista = listaHash.get(i).getArtists();
+                for(int j=0; j<listaArtista.size();j++){
+                    if(!lista.contains(listaArtista.get(j))){
+
+                    }
+                }
+            }
+            current = current.plusDays(1);
+        }
+
+
+
 //        MyHash<String,Artists> artistasCount = new MyHashImpl<>(113);
 //        for(int i=0; i < songs.size(); i++) {
 //            MyList<Artists> artist = songs.get(i).getArtists();
