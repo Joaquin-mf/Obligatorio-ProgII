@@ -9,6 +9,5 @@ public interface MyHash <K,T> {
     void remove(K key) throws ElementNotFoundException;
     boolean contains(K key);
     HashNode<K,T> findNode(K key);
-    MyList<T> values();
-
+    MyList<T> values(MyList<T> ans);
 }

@@ -6,7 +6,7 @@ import uy.edu.um.tad.queue.MyQueue;
 import uy.edu.um.tad.stack.EmptyStackException;
 import uy.edu.um.tad.stack.MyStack;
 
-public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
+public class MyLinkedListImpl<T extends Comparable<T>> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
     //@Getter
     private Node<T> first;
@@ -232,5 +232,64 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
     public boolean isEmpty() {
         return (this.first == null && this.last==null);
+    }
+
+    public void sort() {
+        if (first == null || first.getNext() == null) {
+            return; // No necesita ordenarse si la lista está vacía o tiene solo un elemento
+        }
+        first = mergeSort(first);
+    }
+
+    private Node<T> mergeSort(Node<T> head) {
+        if (head == null || head.getNext() == null) {
+            return head; // Caso base: si la lista está vacía o tiene solo un elemento
+        }
+
+        // Paso 1: Dividir la lista en dos mitades
+        Node<T> middle = getMiddle(head);
+        Node<T> nextOfMiddle = middle.getNext();
+        middle.setNext(null);
+
+        // Paso 2: Ordenar recursivamente las dos mitades
+        Node<T> left = mergeSort(head);
+        Node<T> right = mergeSort(nextOfMiddle);
+
+        // Paso 3: Mezclar las mitades ordenadas en orden descendente
+        return sortedMerge(left, right);
+    }
+
+    private Node<T> sortedMerge(Node<T> left, Node<T> right) {
+        if (left == null) {
+            return right;
+        }
+        if (right == null) {
+            return left;
+        }
+
+        Node<T> result;
+        if (left.getValue().compareTo(right.getValue()) >= 0) {
+            result = left;
+            result.setNext(sortedMerge(left.getNext(), right));
+        } else {
+            result = right;
+            result.setNext(sortedMerge(left, right.getNext()));
+        }
+        return result;
+    }
+
+    private Node<T> getMiddle(Node<T> head) {
+        if (head == null) {
+            return head;
+        }
+
+        Node<T> slow = head;
+        Node<T> fast = head.getNext();
+
+        while (fast != null && fast.getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+        return slow;
     }
 }

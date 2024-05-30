@@ -1,7 +1,6 @@
 package uy.edu.um.tad.hash;
 
 import exceptions.ElementNotFoundException;
-import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.linkedlist.MyList;
 
 public class MyHashImpl<K, T> implements MyHash<K, T> {
@@ -100,15 +99,15 @@ public class MyHashImpl<K, T> implements MyHash<K, T> {
     }
 
     @Override
-    public MyList<T> values(){
-        MyList<T> ans = new MyLinkedListImpl<>();
-        for(int i=0; i<hashTable.length; i++){
-            if (hashTable[i].getData() != null){
+    public MyList<T> values(MyList<T> ans) {
+        for (int i = 0; i < hashTable.length; i++) {
+            if (hashTable[i] != null && hashTable[i].getData() != null) {
                 ans.add(hashTable[i].getData());
             }
         }
         return ans;
     }
+
 
     public HashNode<K, T>[] getHashTable() {
         return hashTable;

@@ -136,7 +136,7 @@ public class MySongStatsImpl implements MySongStats {
     @Override
     public MyList<Artists> Top7inTop50(LocalDate fechaInicio, LocalDate fechaFin) {
         LocalDate current = fechaFin;
-        MyList<Artists> lista = new MyLinkedListImpl<>();
+        MyHash<String,Artists> artists = new MyHashImpl<>(1113);
 
         //manejo del rango de fechas
         while(!current.equals(fechaFin.plusDays(1))){
@@ -145,61 +145,31 @@ public class MySongStatsImpl implements MySongStats {
                 MyList<Artists> listaArtista = listaHash.get(i).getArtists();
                 for(int j=0; j<listaArtista.size();j++){
                     Artists artist = listaArtista.get(j);
-                    if(!lista.contains(artist)){
+                    if(!artists.contains(artist.getName())){
                         artist.setRank(1);
-                        lista.add(listaArtista.get(j));
+                        artists.put(artist.getName(),artist);
                     }
+                    Artists var = artists.findNode(artist.getName()).getData();
+                    int ocurrencia = var.getRank();
+                    var.setRank(ocurrencia+1);
                 }
             }
             current = current.plusDays(1);
         }
+        MyList<Artists> lista = new MyLinkedListImpl<>();
+        artists.values(lista).sort();
+//        for(int i=0; i< lista.size(); i++){
+//            System.out.println(lista.get(i).getName()+" ___ "+lista.get(i).getRank());
 
-
-
-//        MyHash<String,Artists> artistasCount = new MyHashImpl<>(113);
-//        for(int i=0; i < songs.size(); i++) {
-//            MyList<Artists> artist = songs.get(i).getArtists();
-//
-//            for (int k = 0; k < artist.size(); k++){
-//                String name = artist.get(k).getName();
-//                if (artistasCount.contains(name)) {
-//                    int ocurrencias = artistasCount.findNode(name).getData().getRank();
-//                    artistasCount.findNode(name).getData().setRank(ocurrencias + 1);
-//                }else{
-//                    artist.get(k).setRank(1);
-//                    artistasCount.put(name,artist.get(k));
-//                }
-//            }
-//        }
-//        MyList<Artists> tabla = artistasCount.values();
-//
-
-
-        return null;
+        for(int i=0; i<7;i++) {
+            System.out.println(lista.get(i).getName() + " con " + lista.get(i).getRank() + " ocurrencias");
+        }
+        return lista;
     }
 
     @Override
     public int OccurrenciesArtistinTop50(String name, LocalDate fecha) {
-
         MyList<SpotifySong> songs = hashArtistDate.findNode(fecha.toString() + "_" + name).getData();
-
-// TESTEO DE FUNCION
-//        MyList<SpotifySong> songs = new MyLinkedListImpl<>();
-//
-//        for(int i=0; i<mySongs.size(); i++){
-//            SpotifySong song = mySongs.get(i);
-//            if(song.getSnapshotDate().equals(fecha)){
-//                for(int j=0; j<song.getArtists().size();j++){
-//                    if(song.getArtists().get(j).getName().equals(name)){
-//                        songs.add(song);
-//                    }
-//                }
-//            }
-//        }
-//
-//        System.out.println(songs.size());
-
-
         return songs.size();
     }
 
