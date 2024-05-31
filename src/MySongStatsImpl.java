@@ -1,12 +1,5 @@
-import DataStructures.HashArtistDate;
 import Entities.Artists;
 import Entities.SpotifySong;
-import DataStructures.CSVReader;
-import DataStructures.HashDate;
-import DataStructures.HashDateCountry;
-import uy.edu.um.tad.binarytree.BinaryTree;
-import uy.edu.um.tad.binarytree.SearchBinaryTreeImpl;
-import uy.edu.um.tad.hash.HashNode;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
@@ -18,7 +11,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Scanner;
 
 public class MySongStatsImpl implements MySongStats {
@@ -128,6 +120,7 @@ public class MySongStatsImpl implements MySongStats {
 
     @Override
     public MyList<SpotifySong> Top5inTop50(LocalDate fecha) {
+        MyList<SpotifySong> lista = hashDate.findNode(fecha.toString()).getData();
 
         return null;
     }
@@ -186,132 +179,6 @@ public class MySongStatsImpl implements MySongStats {
             }
         }
         return lista.size();
-    }
-
-
-    public void menu() {
-        Scanner scanner = new Scanner(System.in);
-        boolean flag = false;
-        while (flag == false) {
-            System.out.println("Elija una funcion: \n1)Top 10 canciones en un país en tal día. \n2)Top 5 canciones que aparecen en más top 50 en un día dado. \n3)Top 7 artistas que más aparecen en el top 50 para un rango de fechas dado. \n4)cantidad de veces que aparece un artista en el top 50 en una fecha dada. \n5)cantidad de canciones con un tempo en un rango especifico para un rango especifico de fechas");
-            int numero = scanner.nextInt();
-            if (numero==1){
-                System.out.println("ingrese el nombre del pais");
-                String NombrePais = scanner.next();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate fecha = null;
-                boolean fechaValida = false;
-                while (!fechaValida) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
-                    String fechaStr = scanner.nextLine();
-                    try {
-                        fecha = LocalDate.parse(fechaStr, formatter);
-                        fechaValida = true;
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
-                    }
-                }
-                Top10(fecha,NombrePais);
-                flag = true;
-            }else if(numero==2){
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate fecha = null;
-                boolean fechaValida = false;
-                while (!fechaValida) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
-                    String fechaStr = scanner.nextLine();
-                    try {
-                        fecha = LocalDate.parse(fechaStr, formatter);
-                        fechaValida = true;
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
-                    }
-                }
-                Top5inTop50(fecha);
-                flag = true;
-            }else if(numero==3){
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate fechaInicio = null;
-                boolean fechaValida = false;
-                while (!fechaValida) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
-                    String fechaInicioStr = scanner.nextLine();
-                    try {
-                        fechaInicio = LocalDate.parse(fechaInicioStr, formatter);
-                        fechaValida = true;
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
-                    }
-                }
-                LocalDate fechaFin = null;
-                boolean fechaValida2 = false;
-                while (!fechaValida2) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
-                    String fechaFinStr = scanner.nextLine();
-                    try {
-                        fechaFin = LocalDate.parse(fechaFinStr, formatter);
-                        fechaValida2 = true;
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
-                    }
-                }
-                Top7inTop50(fechaInicio,fechaFin);
-                flag = true;
-            }else if(numero==4){
-                System.out.println("ingrese el nombre del artista");
-                String NombreArtista = scanner.next();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate fecha = null;
-                boolean fechaValida = false;
-                while (!fechaValida) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
-                    String fechaStr = scanner.nextLine();
-                    try {
-                        fecha = LocalDate.parse(fechaStr, formatter);
-                        fechaValida = true;
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
-                    }
-                }
-                OccurrenciesArtistinTop50(NombreArtista,fecha);
-                flag = true;
-            }else if(numero==5){
-                System.out.println("ingrese el tiempo máximo");
-                int TempoMax = scanner.nextInt();
-                System.out.println("ingrese el tiempo mínimo");
-                int TempoMin = scanner.nextInt();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate fechaInicio = null;
-                boolean fechaValida = false;
-                while (!fechaValida) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
-                    String fechaInicioStr = scanner.nextLine();
-                    try {
-                        fechaInicio = LocalDate.parse(fechaInicioStr, formatter);
-                        fechaValida = true;
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
-                    }
-                }
-                LocalDate fechaFin = null;
-                boolean fechaValida2 = false;
-                while (!fechaValida2) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato dd/MM/yyyy: ");
-                    String fechaFinStr = scanner.nextLine();
-                    try {
-                        fechaFin = LocalDate.parse(fechaFinStr, formatter);
-                        fechaValida2 = true;
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
-                    }
-                }
-                SongsbetweenTempoAndDate(TempoMax, TempoMin, fechaInicio, fechaFin);
-                flag = true;
-            }else{
-                System.out.println("elija un numero entre 1 y 5");
-            }
-        }
-        scanner.close();
     }
 
 }
