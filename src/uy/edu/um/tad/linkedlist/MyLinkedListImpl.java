@@ -1,12 +1,13 @@
 package uy.edu.um.tad.linkedlist;
 
 
+import Entities.SpotifySong;
 import uy.edu.um.tad.queue.EmptyQueueException;
 import uy.edu.um.tad.queue.MyQueue;
 import uy.edu.um.tad.stack.EmptyStackException;
 import uy.edu.um.tad.stack.MyStack;
 
-public class MyLinkedListImpl<T extends Comparable<T>> implements MyList<T>, MyQueue<T>, MyStack<T> {
+public class MyLinkedListImpl<T extends Comparable<T>>  implements MyList<T>, MyQueue<T>, MyStack<T> {
 
     //@Getter
     private Node<T> first;
@@ -291,5 +292,10 @@ public class MyLinkedListImpl<T extends Comparable<T>> implements MyList<T>, MyQ
             fast = fast.getNext().getNext();
         }
         return slow;
+    }
+
+    @Override
+    public int compareTo(MyList<SpotifySong> spotifySongMyList) {
+        return 0;
     }
 }

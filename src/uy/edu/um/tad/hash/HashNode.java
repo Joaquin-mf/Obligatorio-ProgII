@@ -2,7 +2,7 @@ package uy.edu.um.tad.hash;
 
 import java.util.Objects;
 
-public class HashNode <K,T> {
+public class HashNode <K,T extends Comparable<T>> implements Comparable<HashNode<K, T>> {
     private K key;
     private T data;
 
@@ -34,6 +34,11 @@ public class HashNode <K,T> {
         if (o == null || getClass() != o.getClass()) return false;
         HashNode<?, ?> hashNode = (HashNode<?, ?>) o;
         return Objects.equals(key, hashNode.key);
+    }
+
+    @Override
+    public int compareTo(HashNode<K, T> HashNode) {
+        return this.data.compareTo(HashNode.data);
     }
 
     @Override

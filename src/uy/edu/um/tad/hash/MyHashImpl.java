@@ -1,9 +1,10 @@
 package uy.edu.um.tad.hash;
 
 import exceptions.ElementNotFoundException;
+import uy.edu.um.tad.heap.MyHeap;
 import uy.edu.um.tad.linkedlist.MyList;
 
-public class MyHashImpl<K, T> implements MyHash<K, T> {
+public class MyHashImpl<K, T extends Comparable<T>> implements MyHash<K, T> {
     private HashNode<K, T>[] hashTable;
     private int capacity;
     private int size = 0;
@@ -106,6 +107,18 @@ public class MyHashImpl<K, T> implements MyHash<K, T> {
             }
         }
         return ans;
+    }
+
+    public MyHeap<HashNode<K,T>> myHeapTop5(MyHeap<HashNode<K,T>> heap){
+        for(int i=0; i<hashTable.length; i++){
+            if(hashTable[i] != null) {
+                heap.insert(hashTable[i]);
+                if (heap.size() > 5) {
+                    heap.delete();
+                }
+            }
+        }
+        return heap;
     }
 
 

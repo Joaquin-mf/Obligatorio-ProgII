@@ -1,6 +1,8 @@
 package uy.edu.um.tad.linkedlist;
 
-public interface MyList<T> {
+import Entities.SpotifySong;
+
+public interface MyList<T extends Comparable<T>> extends Comparable<MyList<SpotifySong>> {
 
     void add(T value);
 

@@ -1,17 +1,17 @@
 import Entities.Artists;
 import Entities.SpotifySong;
+import uy.edu.um.tad.hash.HashNode;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
+import uy.edu.um.tad.heap.MyHeap;
+import uy.edu.um.tad.heap.MyHeapImpl;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.linkedlist.MyList;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+
 
 public class MySongStatsImpl implements MySongStats {
     private MyHash<String, MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(113);
@@ -20,7 +20,7 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/src/DatasetTEST.csv";
+        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/.idea/DatasetTEST.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
@@ -102,12 +102,10 @@ public class MySongStatsImpl implements MySongStats {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public MyList<SpotifySong> Top10(LocalDate fecha, String Pais) {
-
         MyList<SpotifySong> songsList = hashDateCountry.findNode(fecha.toString() + "_" + Pais).getData();
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
         System.out.println("El top 10 del "+fecha.toString()+" en "+Pais+":\n");
@@ -121,10 +119,28 @@ public class MySongStatsImpl implements MySongStats {
     @Override
     public MyList<SpotifySong> Top5inTop50(LocalDate fecha) {
         MyList<SpotifySong> lista = hashDate.findNode(fecha.toString()).getData();
+        MyHash<String,Integer> hashSong = new MyHashImpl<>(113);
+
+        for(int i=0; i< lista.size(); i++){
+            SpotifySong song = lista.get(i);
+            if(!hashSong.contains(song.getName())){
+                hashSong.put(song.getName(), 1);
+            }
+            int contador = hashSong.findNode(song.getName()).getData();
+            hashSong.findNode(song.getName()).setData(contador + 1);
+        }
+        MyHeapImpl<HashNode<String,Integer>> maxheap = new MyHeapImpl<>(5,true);
+        hashSong.myHeapTop5(maxheap);
+
+        System.out.println("Heap size: " + maxheap.size());
+
+        while (maxheap.size() > 0) {
+            HashNode maximo = maxheap.delete();
+            System.out.println("Elemento-->" + maximo.getKey() +" " +maximo.getData());
+        }
 
         return null;
     }
-
 
     @Override
     public MyList<Artists> Top7inTop50(LocalDate fechaInicio, LocalDate fechaFin) {
