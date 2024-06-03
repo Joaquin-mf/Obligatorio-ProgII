@@ -14,16 +14,16 @@ public class Main {
             if (numero==1){
                 System.out.println("Ingrese el nombre del pais (en formato de dos letras USA = US)");
                 String NombrePais = scanner.next();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 LocalDate fecha = null;
                 boolean fechaValida = false;
                 while (!fechaValida) {
                     System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
-                    String fechaStr = scanner.nextLine();
+                    String fechaStr = scanner.next();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                     try {
                         fecha = LocalDate.parse(fechaStr, formatter);
                         fechaValida = true;
-                    } catch (DateTimeParseException e) {
+                    } catch (Exception e) {
                         System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
                     }
                 }
