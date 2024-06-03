@@ -17,7 +17,7 @@ public class Main {
                 LocalDate fecha = null;
                 boolean fechaValida = false;
                 while (!fechaValida) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
+                    System.out.print("Por favor, ingresa una fecha en formato yyyy/MM/dd: ");
                     String fechaStr = scanner.next();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                     try {
@@ -35,7 +35,7 @@ public class Main {
                 boolean fechaValida = false;
                 while (!fechaValida) {
                     System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
-                    String fechaStr = scanner.nextLine();
+                    String fechaStr = scanner.next();
                     try {
                         fecha = LocalDate.parse(fechaStr, formatter);
                         fechaValida = true;
@@ -52,7 +52,7 @@ public class Main {
                 boolean fechaValida = false;
                 while (!fechaValida) {
                     System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
-                    String fechaInicioStr = scanner.nextLine();
+                    String fechaInicioStr = scanner.next();
                     try {
                         fechaInicio = LocalDate.parse(fechaInicioStr, formatter);
                         fechaValida = true;
@@ -64,7 +64,7 @@ public class Main {
                 boolean fechaValida2 = false;
                 while (!fechaValida2) {
                     System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
-                    String fechaFinStr = scanner.nextLine();
+                    String fechaFinStr = scanner.next();
                     try {
                         fechaFin = LocalDate.parse(fechaFinStr, formatter);
                         fechaValida2 = true;
@@ -82,7 +82,7 @@ public class Main {
                 boolean fechaValida = false;
                 while (!fechaValida) {
                     System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
-                    String fechaStr = scanner.nextLine();
+                    String fechaStr = scanner.next();
                     try {
                         fecha = LocalDate.parse(fechaStr, formatter);
                         fechaValida = true;
@@ -102,7 +102,7 @@ public class Main {
                 boolean fechaValida = false;
                 while (!fechaValida) {
                     System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
-                    String fechaInicioStr = scanner.nextLine();
+                    String fechaInicioStr = scanner.next();
                     try {
                         fechaInicio = LocalDate.parse(fechaInicioStr, formatter);
                         fechaValida = true;
@@ -114,7 +114,7 @@ public class Main {
                 boolean fechaValida2 = false;
                 while (!fechaValida2) {
                     System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
-                    String fechaFinStr = scanner.nextLine();
+                    String fechaFinStr = scanner.next();
                     try {
                         fechaFin = LocalDate.parse(fechaFinStr, formatter);
                         fechaValida2 = true;

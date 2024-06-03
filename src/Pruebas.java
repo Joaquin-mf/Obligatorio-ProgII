@@ -19,7 +19,7 @@ public class Pruebas {
         //prueba.Top5inTop50(fecha);
 
 
-       prueba.Top10(fecha,"ZA");
+        prueba.Top10(fecha,"ZA");
         int nro = prueba.OccurrenciesArtistinTop50("Tommy Richman",fecha);
         System.out.println(nro);
 //

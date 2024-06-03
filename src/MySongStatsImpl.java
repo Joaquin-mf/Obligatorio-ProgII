@@ -20,7 +20,7 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/.idea/DatasetTEST.csv";
+        String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/universal_top_spotify_songs.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
@@ -106,9 +106,10 @@ public class MySongStatsImpl implements MySongStats {
 
     @Override
     public MyList<SpotifySong> Top10(LocalDate fecha, String Pais) {
+        if(hashDateCountry.findNode(fecha.toString() + "_" + Pais).getData() == null){return null;}
         MyList<SpotifySong> songsList = hashDateCountry.findNode(fecha.toString() + "_" + Pais).getData();
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
-        System.out.println("El top 10 del "+fecha.toString()+" en "+Pais+":\n");
+        System.out.println("El top 10 del "+ fecha.toString() + " en " + Pais + ":\n");
         for (int i = 0; i <= 9; i++) {
             lista.add(songsList.get(i));
             System.out.println(songsList.get(i).getName() + " tiene el rank: " + songsList.get(i).getDailyRank());
