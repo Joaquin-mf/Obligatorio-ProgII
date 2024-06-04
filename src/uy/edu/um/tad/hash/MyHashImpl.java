@@ -50,7 +50,8 @@ public class MyHashImpl<K, T extends Comparable<T>> implements MyHash<K, T> {
         }
     }
 
-    public HashNode<K, T> findNode(K key) {
+    @Override
+    public T findData(K key) {
         int hashCode = key.hashCode();
         int absHashCode = hashCode & Integer.MAX_VALUE; // Operación bit a bit para obtener el valor absoluto
         int posicion = absHashCode % capacity;
@@ -58,7 +59,7 @@ public class MyHashImpl<K, T extends Comparable<T>> implements MyHash<K, T> {
 
         while (hashTable[posicion] != null && attempts > 0) {
             if (hashTable[posicion].getKey().equals(key)) {
-                return hashTable[posicion];
+                return hashTable[posicion].getData();
             }
             posicion = (posicion + 1) % capacity;
             attempts--;
@@ -99,27 +100,6 @@ public class MyHashImpl<K, T extends Comparable<T>> implements MyHash<K, T> {
         return find(key) != -1;
     }
 
-    @Override
-    public MyList<T> values(MyList<T> ans) {
-        for (int i = 0; i < hashTable.length; i++) {
-            if (hashTable[i] != null && hashTable[i].getData() != null) {
-                ans.add(hashTable[i].getData());
-            }
-        }
-        return ans;
-    }
-
-    public MyHeap<HashNode<K,T>> myHeapTop5(MyHeap<HashNode<K,T>> heap){
-        for(int i=0; i<hashTable.length; i++){
-            if(hashTable[i] != null) {
-                heap.insert(hashTable[i]);
-                if (heap.size() > 5) {
-                    heap.delete();
-                }
-            }
-        }
-        return heap;
-    }
 
 
     public HashNode<K, T>[] getHashTable() {
@@ -145,5 +125,6 @@ public class MyHashImpl<K, T extends Comparable<T>> implements MyHash<K, T> {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
 }
 

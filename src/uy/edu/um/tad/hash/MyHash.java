@@ -9,7 +9,5 @@ public interface MyHash <K,T extends Comparable<T>> {
     int find(K key);
     void remove(K key) throws ElementNotFoundException;
     boolean contains(K key);
-    HashNode<K,T> findNode(K key);
-    MyList<T> values(MyList<T> ans);
-    MyHeap<HashNode<K,T>> myHeapTop5(MyHeap<HashNode<K,T>> heap);
+    T findData(K key);
 }

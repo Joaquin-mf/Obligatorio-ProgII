@@ -13,15 +13,15 @@ public class Pruebas {
 
         MySongStatsImpl prueba = new MySongStatsImpl();
 
-        LocalDate fecha = LocalDate.of(2024,05,13);
-        LocalDate fecha2 = LocalDate.of(2024,04,13);
+        LocalDate fecha = LocalDate.of(2024,05,03);
+        LocalDate fecha2 = LocalDate.of(2024,05,2);
 
-        //prueba.Top5inTop50(fecha);
+        prueba.Top5inTop50(fecha2);
 
 
-       prueba.Top10(fecha,"ZA");
-        int nro = prueba.OccurrenciesArtistinTop50("Tommy Richman",fecha);
-        System.out.println(nro);
+//       prueba.Top10(fecha,"ZA");
+//        int nro = prueba.OccurrenciesArtistinTop50("Tommy Richman",fecha);
+//        System.out.println(nro);
 //
 //        long st = System.nanoTime();
 //        MyList<SpotifySong> lista = prueba.Top10(fecha,"US");

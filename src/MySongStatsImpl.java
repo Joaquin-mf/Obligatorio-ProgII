@@ -1,5 +1,7 @@
 import Entities.Artists;
 import Entities.SpotifySong;
+import uy.edu.um.tad.binarytree.BinaryTree;
+import uy.edu.um.tad.binarytree.SearchBinaryTreeImpl;
 import uy.edu.um.tad.hash.HashNode;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
@@ -7,10 +9,13 @@ import uy.edu.um.tad.heap.MyHeap;
 import uy.edu.um.tad.heap.MyHeapImpl;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.linkedlist.MyList;
+import uy.edu.um.tad.ntree.TreeImpl;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class MySongStatsImpl implements MySongStats {
@@ -20,7 +25,7 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/.idea/DatasetTEST.csv";
+        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/DatasetTEST.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
@@ -59,23 +64,7 @@ public class MySongStatsImpl implements MySongStats {
                         Integer.parseInt(columnas[5]), // WeeklyMovement
                         columnas[6], // Country
                         LocalDate.parse(columnas[7]), // SnapshotDate
-                        Integer.parseInt(columnas[8]), // Popularity
-                        Boolean.parseBoolean(columnas[9]), // IsExplicit
-                        Integer.parseInt(columnas[10]), // DurationMs
-                        columnas[11], // AlbumName
-                        columnas[12], // AlbumReleaseDate
-                        Double.parseDouble(columnas[13]), // Danceability
-                        Double.parseDouble(columnas[14]), // Energy
-                        Integer.parseInt(columnas[15]), // Key
-                        Double.parseDouble(columnas[16]), // Loudness
-                        Integer.parseInt(columnas[17]), // Mode
-                        Double.parseDouble(columnas[18]), // Speechiness
-                        Double.parseDouble(columnas[19]), // Acousticness
-                        Double.parseDouble(columnas[20]), // Instrumentalness
-                        Double.parseDouble(columnas[21]), // Liveness
-                        Double.parseDouble(columnas[22]), // Valence
-                        Double.parseDouble(columnas[23]), // Tempo
-                        Integer.parseInt(columnas[24]) // TimeSignature
+                        Double.parseDouble(columnas[23]) // Tempo
                 );
 
                 // Agrega la canción a las Estructuras
@@ -83,20 +72,20 @@ public class MySongStatsImpl implements MySongStats {
                 if (!hashDateCountry.contains(key1)) {
                     hashDateCountry.put(key1, new MyLinkedListImpl<>());
                 }
-                hashDateCountry.findNode(key1).getData().add(cancion);
+                hashDateCountry.findData(key1).add(cancion);
 
                 String key2 = cancion.getSnapshotDate().toString();
                 if (!hashDate.contains(key2)) {
                     hashDate.put(key2, new MyLinkedListImpl<>());
                 }
-                hashDate.findNode(key2).getData().add(cancion);
+                hashDate.findData(key2).add(cancion);
 
                 for (int i = 0; i < artistas.size(); i++) {
                     String key3 = cancion.getSnapshotDate().toString() + "_" + cancion.getArtists().get(i).getName();
                     if (!hashArtistDate.contains(key3)) {
                         hashArtistDate.put(key3, new MyLinkedListImpl<>());
                     }
-                    hashArtistDate.findNode(key3).getData().add(cancion);
+                    hashArtistDate.findData(key3).add(cancion);
                 }
             }
         } catch (IOException e) {
@@ -106,50 +95,53 @@ public class MySongStatsImpl implements MySongStats {
 
     @Override
     public MyList<SpotifySong> Top10(LocalDate fecha, String Pais) {
-        MyList<SpotifySong> songsList = hashDateCountry.findNode(fecha.toString() + "_" + Pais).getData();
+        MyList<SpotifySong> songsList = hashDateCountry.findData(fecha.toString() + "_" + Pais);
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
         System.out.println("El top 10 del "+fecha.toString()+" en "+Pais+":\n");
         for (int i = 0; i <= 9; i++) {
             lista.add(songsList.get(i));
-            System.out.println(songsList.get(i).getName() + " tiene el rank: " + songsList.get(i).getDailyRank());
+            System.out.println((i+1)+". "+songsList.get(i).getName()+ " tiene el rank: " + songsList.get(i).getDailyRank());
         }
         return lista;
     }
 
     @Override
     public MyList<SpotifySong> Top5inTop50(LocalDate fecha) {
-        MyList<SpotifySong> lista = hashDate.findNode(fecha.toString()).getData();
-        MyHash<String,Integer> hashSong = new MyHashImpl<>(113);
+        MyList<SpotifySong> lista = hashDate.findData(fecha.toString());
+        MyHashImpl<String,SpotifySong> hashSong = new MyHashImpl<>(113);
 
-        for(int i=0; i< lista.size(); i++){
+        for(int i=0; i < lista.size(); i++){
             SpotifySong song = lista.get(i);
             if(!hashSong.contains(song.getName())){
-                hashSong.put(song.getName(), 1);
+                song.setCounter(1);
+                hashSong.put(song.getName(),song);
             }
-            int contador = hashSong.findNode(song.getName()).getData();
-            hashSong.findNode(song.getName()).setData(contador + 1);
-        }
-        MyHeapImpl<HashNode<String,Integer>> maxheap = new MyHeapImpl<>(5,true);
-        hashSong.myHeapTop5(maxheap);
-
-        System.out.println("Heap size: " + maxheap.size());
-
-        while (maxheap.size() > 0) {
-            HashNode maximo = maxheap.delete();
-            System.out.println("Elemento-->" + maximo.getKey() +" " +maximo.getData());
+            SpotifySong cancion = hashSong.findData(song.getName());
+            cancion.setCounter(cancion.getCounter() + 1);
         }
 
+        MyHeap<SpotifySong> heap = new MyHeapImpl<>(5, true);
+        for (int i=0; i<hashSong.getHashTable().length;i++){
+            if(hashSong.getHashTable()[i] != null){
+                heap.insert(hashSong.getHashTable()[i].getData());
+            }
+        }
+
+        System.out.println("___Top 5 en el top 50___" + fecha.toString());
+        for(int i=0; i<=4; i++){
+            System.out.println((i+1)+". "+heap.delete().getName()+" "+ heap.delete().getCounter());
+        }
         return null;
     }
 
     @Override
     public MyList<Artists> Top7inTop50(LocalDate fechaInicio, LocalDate fechaFin) {
         LocalDate current = fechaFin;
-        MyHash<String,Artists> artists = new MyHashImpl<>(1113);
+        MyHashImpl<String,Artists> artists = new MyHashImpl<>(1113);
 
         //manejo del rango de fechas
         while(!current.equals(fechaFin.plusDays(1))){
-            MyList<SpotifySong> listaHash = hashDate.findNode(current.toString()).getData();
+            MyList<SpotifySong> listaHash = hashDate.findData(current.toString());
             for(int i=0; i<listaHash.size();i++){
                 MyList<Artists> listaArtista = listaHash.get(i).getArtists();
                 for(int j=0; j<listaArtista.size();j++){
@@ -158,7 +150,7 @@ public class MySongStatsImpl implements MySongStats {
                         artist.setRank(1);
                         artists.put(artist.getName(),artist);
                     }
-                    Artists var = artists.findNode(artist.getName()).getData();
+                    Artists var = artists.findData(artist.getName());
                     int ocurrencia = var.getRank();
                     var.setRank(ocurrencia+1);
                 }
@@ -166,7 +158,12 @@ public class MySongStatsImpl implements MySongStats {
             current = current.plusDays(1);
         }
         MyList<Artists> lista = new MyLinkedListImpl<>();
-        artists.values(lista).sort();
+        for(int i=0; i<artists.getHashTable().length; i++){
+            if(artists.getHashTable()[i] != null){
+                lista.add(artists.getHashTable()[i].getData());
+            }
+        }
+        lista.sort();
 //        for(int i=0; i< lista.size(); i++){
 //            System.out.println(lista.get(i).getName()+" ___ "+lista.get(i).getRank());
 
@@ -178,7 +175,7 @@ public class MySongStatsImpl implements MySongStats {
 
     @Override
     public int OccurrenciesArtistinTop50(String name, LocalDate fecha) {
-        MyList<SpotifySong> songs = hashArtistDate.findNode(fecha.toString() + "_" + name).getData();
+        MyList<SpotifySong> songs = hashArtistDate.findData(fecha.toString() + "_" + name);
         return songs.size();
     }
 
@@ -187,7 +184,7 @@ public class MySongStatsImpl implements MySongStats {
         LocalDate current = fechaFin;
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
         while(!current.equals(fechaFin.plusDays(1))){
-            MyList<SpotifySong> listaSongs = hashDate.findNode(current.toString()).getData();
+            MyList<SpotifySong> listaSongs = hashDate.findData(current.toString());
             for(int i=0; i<listaSongs.size();i++){
                 if(listaSongs.get(i).getTempo()<TempoMax && listaSongs.get(i).getTempo()<TempoMin){
                     lista.add(listaSongs.get(i));
