@@ -178,7 +178,7 @@ public class MySongStatsImpl implements MySongStats {
     @Override
     public int OccurrenciesArtistinTop50(String name, LocalDate fecha) {
         MyList<SpotifySong> songs = hashArtistDate.findData(fecha.toString() + "_" + name);
-        System.out.println("La cantidad de ocurrencias de "+ name + "es de: "+songs.size());
+        System.out.println("La cantidad de ocurrencias de "+ name + " es: "+songs.size());
         return songs.size();
     }
 
