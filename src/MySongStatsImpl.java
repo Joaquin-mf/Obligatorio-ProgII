@@ -128,10 +128,12 @@ public class MySongStatsImpl implements MySongStats {
         }
 
         System.out.println("___Top 5 en el top 50___" + fecha.toString());
+        MyList<SpotifySong> ans = new MyLinkedListImpl<>();
         for(int i=0; i<=4; i++){
+            ans.add(heap.get());
             System.out.println((i+1)+". "+heap.delete().getName()+" "+ heap.delete().getCounter());
         }
-        return null;
+        return ans;
     }
 
     @Override
@@ -168,7 +170,7 @@ public class MySongStatsImpl implements MySongStats {
 //            System.out.println(lista.get(i).getName()+" ___ "+lista.get(i).getRank());
 
         for(int i=0; i<7;i++) {
-            System.out.println(lista.get(i).getName() + " con " + lista.get(i).getRank() + " ocurrencias");
+            System.out.println((i+1)+". "+lista.get(i).getName() + " con: " + lista.get(i).getRank() + " ocurrencias");
         }
         return lista;
     }
@@ -176,6 +178,7 @@ public class MySongStatsImpl implements MySongStats {
     @Override
     public int OccurrenciesArtistinTop50(String name, LocalDate fecha) {
         MyList<SpotifySong> songs = hashArtistDate.findData(fecha.toString() + "_" + name);
+        System.out.println("La cantidad de ocurrencias de "+ name + "es de: "+songs.size());
         return songs.size();
     }
 
@@ -191,6 +194,7 @@ public class MySongStatsImpl implements MySongStats {
                 }
             }
         }
+        System.out.println("Las canciones entre: \n "+TempoMin+" < Tempo< "+TempoMax+"\n "+ fechaInicio.toString()+" < Fecha< "+fechaFin.toString()+"\nSon ----> "+lista.size());
         return lista.size();
     }
 
