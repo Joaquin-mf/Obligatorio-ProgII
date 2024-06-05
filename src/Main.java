@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("Inicializando programa \n");
         MySongStats main = new MySongStatsImpl();
         Scanner scanner = new Scanner(System.in);
         boolean flag = false;
         while (flag == false) {
-            System.out.println("Elija una funcion: \n1)Top 10 canciones en un país en tal día. \n2)Top 5 canciones que aparecen en más top 50 en un día dado. \n3)Top 7 artistas que más aparecen en el top 50 para un rango de fechas dado. \n4)cantidad de veces que aparece un artista en el top 50 en una fecha dada. \n5)cantidad de canciones con un tempo en un rango especifico para un rango especifico de fechas");
+            System.out.println("MENU: \n1) Top 10 canciones en un país en tal día. \n2) Top 5 canciones que aparecen en más top 50 en un día dado. \n3) Top 7 artistas que más aparecen en el top 50 para un rango de fechas dado. \n4) cantidad de veces que aparece un artista en el top 50 en una fecha dada. \n5) cantidad de canciones con un tempo en un rango especifico para un rango especifico de fechas \n 6) Salir");
             int numero = scanner.nextInt();
             if (numero==1){
                 System.out.println("Ingrese el nombre del pais (en formato de dos letras USA = US)");
