@@ -29,13 +29,12 @@ public class Main {
                     }
                 }
                 main.Top10(fecha,NombrePais);
-                flag = true;
             }else if(numero==2){
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 LocalDate fecha = null;
                 boolean fechaValida = false;
                 while (!fechaValida) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
+                    System.out.print("Por favor, ingresa una fecha en formato yyyy/MM/dd: ");
                     String fechaStr = scanner.next();
                     try {
                         fecha = LocalDate.parse(fechaStr, formatter);
@@ -46,7 +45,6 @@ public class Main {
                 }
                 System.out.println(fecha.toString());
                 main.Top5inTop50(fecha);
-                flag = true;
             }else if(numero==3){
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 LocalDate fechaInicio = null;
@@ -64,7 +62,7 @@ public class Main {
                 LocalDate fechaFin = null;
                 boolean fechaValida2 = false;
                 while (!fechaValida2) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
+                    System.out.print("Por favor, ingresa una fecha de finalizacion en formato yyyy/MM/dd: ");
                     String fechaFinStr = scanner.next();
                     try {
                         fechaFin = LocalDate.parse(fechaFinStr, formatter);
@@ -74,7 +72,6 @@ public class Main {
                     }
                 }
                 main.Top7inTop50(fechaInicio,fechaFin);
-                flag = true;
             }else if(numero==4){
                 System.out.println("ingrese el nombre del artista");
                 String NombreArtista = scanner.next();
@@ -82,7 +79,7 @@ public class Main {
                 LocalDate fecha = null;
                 boolean fechaValida = false;
                 while (!fechaValida) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
+                    System.out.print("Por favor, ingresa una fecha en formato yyyy/MM/dd: ");
                     String fechaStr = scanner.next();
                     try {
                         fecha = LocalDate.parse(fechaStr, formatter);
@@ -92,11 +89,10 @@ public class Main {
                     }
                 }
                 main.OccurrenciesArtistinTop50(NombreArtista,fecha);
-                flag = true;
             }else if(numero==5){
-                System.out.println("ingrese el tiempo máximo");
+                System.out.println("ingrese el tempo máximo");
                 int TempoMax = scanner.nextInt();
-                System.out.println("ingrese el tiempo mínimo");
+                System.out.println("ingrese el tempo mínimo");
                 int TempoMin = scanner.nextInt();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 LocalDate fechaInicio = null;
@@ -114,7 +110,7 @@ public class Main {
                 LocalDate fechaFin = null;
                 boolean fechaValida2 = false;
                 while (!fechaValida2) {
-                    System.out.print("Por favor, ingresa una fecha de Inicio en formato yyyy/MM/dd: ");
+                    System.out.print("Por favor, ingresa una fecha de finalizacion en formato yyyy/MM/dd: ");
                     String fechaFinStr = scanner.next();
                     try {
                         fechaFin = LocalDate.parse(fechaFinStr, formatter);
@@ -124,6 +120,8 @@ public class Main {
                     }
                 }
                 main.SongsbetweenTempoAndDate(TempoMax, TempoMin, fechaInicio, fechaFin);
+            }else if(numero == 6){
+                System.out.println("programa finalizado");
                 flag = true;
             }else{
                 System.out.println("elija un numero entre 1 y 5");

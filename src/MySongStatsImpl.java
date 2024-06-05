@@ -25,7 +25,7 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv";
+        String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/Dataset copy.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
