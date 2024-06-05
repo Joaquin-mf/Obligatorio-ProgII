@@ -1,5 +1,7 @@
 import Entities.Artists;
 import Entities.SpotifySong;
+import exceptions.ElementNotFoundException;
+import exceptions.WrongOrder;
 import uy.edu.um.tad.binarytree.BinaryTree;
 import uy.edu.um.tad.binarytree.SearchBinaryTreeImpl;
 import uy.edu.um.tad.hash.HashNode;
@@ -94,8 +96,11 @@ public class MySongStatsImpl implements MySongStats {
     }
 
     @Override
-    public MyList<SpotifySong> Top10(LocalDate fecha, String Pais) {
+    public MyList<SpotifySong> Top10(LocalDate fecha, String Pais) throws ElementNotFoundException {
         MyList<SpotifySong> songsList = hashDateCountry.findData(fecha.toString() + "_" + Pais);
+        if(songsList == null){
+            throw new ElementNotFoundException();
+        }
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
         System.out.println("El top 10 del "+fecha.toString()+" en "+Pais+":\n");
         for (int i = 0; i <= 9; i++) {
@@ -106,8 +111,11 @@ public class MySongStatsImpl implements MySongStats {
     }
 
     @Override
-    public MyList<SpotifySong> Top5inTop50(LocalDate fecha) {
+    public MyList<SpotifySong> Top5inTop50(LocalDate fecha) throws ElementNotFoundException {
         MyList<SpotifySong> lista = hashDate.findData(fecha.toString());
+        if(lista==null){
+            throw new ElementNotFoundException();
+        }
         MyHashImpl<String,SpotifySong> hashSong = new MyHashImpl<>(113);
 
         for(int i=0; i < lista.size(); i++){
@@ -137,7 +145,11 @@ public class MySongStatsImpl implements MySongStats {
     }
 
     @Override
-    public MyList<Artists> Top7inTop50(LocalDate fechaInicio, LocalDate fechaFin) {
+    public MyList<Artists> Top7inTop50(LocalDate fechaInicio, LocalDate fechaFin) throws WrongOrder {
+        if (fechaInicio.isAfter(fechaFin)) {
+            throw new WrongOrder();
+        }
+
         LocalDate current = fechaFin;
         MyHashImpl<String,Artists> artists = new MyHashImpl<>(1113);
 
@@ -183,7 +195,11 @@ public class MySongStatsImpl implements MySongStats {
     }
 
     @Override
-    public int SongsbetweenTempoAndDate(float TempoMax, float TempoMin, LocalDate fechaInicio, LocalDate fechaFin) {
+    public int SongsbetweenTempoAndDate(float TempoMax, float TempoMin, LocalDate fechaInicio, LocalDate fechaFin) throws WrongOrder {
+        if(TempoMin>TempoMax || fechaInicio.isAfter(fechaFin)){
+            throw new WrongOrder();
+        }
+
         LocalDate current = fechaFin;
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
         while(!current.equals(fechaFin.plusDays(1))){
