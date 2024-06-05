@@ -13,7 +13,7 @@ public class Pruebas {
 
         MySongStatsImpl prueba = new MySongStatsImpl();
 
-        LocalDate fecha = LocalDate.of(2024,05,03);
+        LocalDate fecha = LocalDate.of(2024,05,13);
         LocalDate fecha2 = LocalDate.of(2024,05,2);
 
         prueba.Top5inTop50(fecha2);
@@ -29,5 +29,7 @@ public class Pruebas {
 //
 //        System.out.println((fin-st)/1000000000);
 //        prueba.Top7inTop50(fecha2,fecha);
+
+        prueba.SongsbetweenTempoAndDate(100,101,fecha2,fecha);
     }
 }

@@ -14,6 +14,6 @@ public interface MySongStats {
 
     public int OccurrenciesArtistinTop50(String name, LocalDate fecha);
 
-    public int SongsbetweenTempoAndDate(int TempoMax, int TempoMin, LocalDate fechaInicio, LocalDate fechaFin);
+    public int SongsbetweenTempoAndDate(float TempoMax, float TempoMin, LocalDate fechaInicio, LocalDate fechaFin);
 
 }

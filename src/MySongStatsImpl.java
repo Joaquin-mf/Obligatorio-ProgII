@@ -25,7 +25,7 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/Dataset copy.csv";
+        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
@@ -183,7 +183,7 @@ public class MySongStatsImpl implements MySongStats {
     }
 
     @Override
-    public int SongsbetweenTempoAndDate(int TempoMax, int TempoMin, LocalDate fechaInicio, LocalDate fechaFin) {
+    public int SongsbetweenTempoAndDate(float TempoMax, float TempoMin, LocalDate fechaInicio, LocalDate fechaFin) {
         LocalDate current = fechaFin;
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
         while(!current.equals(fechaFin.plusDays(1))){
@@ -193,8 +193,9 @@ public class MySongStatsImpl implements MySongStats {
                     lista.add(listaSongs.get(i));
                 }
             }
+            current=current.plusDays(1);
         }
-        System.out.println("Las canciones entre: \n "+TempoMin+" < Tempo< "+TempoMax+"\n "+ fechaInicio.toString()+" < Fecha< "+fechaFin.toString()+"\nSon ----> "+lista.size());
+        System.out.println("Las canciones entre: \n -"+TempoMin+" < Tempo < "+TempoMax+"\n -"+ fechaInicio.toString()+" < Fecha < "+fechaFin.toString()+"\n Respuesta ----> "+lista.size()+" canciones");
         return lista.size();
     }
 
