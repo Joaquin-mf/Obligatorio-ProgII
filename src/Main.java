@@ -10,7 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean flag = false;
         while (flag == false) {
-            System.out.println("MENU: \n1) Top 10 canciones en un país en tal día. \n2) Top 5 canciones que aparecen en más top 50 en un día dado. \n3) Top 7 artistas que más aparecen en el top 50 para un rango de fechas dado. \n4) cantidad de veces que aparece un artista en el top 50 en una fecha dada. \n5) cantidad de canciones con un tempo en un rango especifico para un rango especifico de fechas \n6) Salir");
+            System.out.println("\n------MENU------: \n1) Top 10 canciones en un país en tal día. \n2) Top 5 canciones que aparecen en más top 50 en un día dado. \n3) Top 7 artistas que más aparecen en el top 50 para un rango de fechas dado. \n4) cantidad de veces que aparece un artista en el top 50 en una fecha dada. \n5) cantidad de canciones con un tempo en un rango especifico para un rango especifico de fechas \n6) Salir");
             int numero = scanner.nextInt();
             if (numero==1){
                 System.out.println("Ingrese el nombre del pais (en formato de dos letras USA = US)");
@@ -73,8 +73,10 @@ public class Main {
                 }
                 main.Top7inTop50(fechaInicio,fechaFin);
             }else if(numero==4){
-                System.out.println("ingrese el nombre del artista");
-                String NombreArtista = scanner.next();
+                scanner.nextLine(); //Limpio buffer del teclado
+                System.out.println("Ingrese el nombre del artista:");
+                String NombreArtista = scanner.nextLine();
+
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 LocalDate fecha = null;
                 boolean fechaValida = false;
@@ -90,9 +92,9 @@ public class Main {
                 }
                 main.OccurrenciesArtistinTop50(NombreArtista,fecha);
             }else if(numero==5){
-                System.out.println("ingrese el tempo máximo");
+                System.out.println("Ingrese el tempo máximo: ");
                 int TempoMax = scanner.nextInt();
-                System.out.println("ingrese el tempo mínimo");
+                System.out.println("Ingrese el tempo mínimo: ");
                 int TempoMin = scanner.nextInt();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 LocalDate fechaInicio = null;
@@ -121,7 +123,8 @@ public class Main {
                 }
                 main.SongsbetweenTempoAndDate(TempoMax, TempoMin, fechaInicio, fechaFin);
             }else if(numero == 6){
-                System.out.println("programa finalizado");
+                System.out.println("Programa Finalizado");
+                System.out.println("-----Gracias-----");
                 flag = true;
             }else{
                 System.out.println("elija un numero entre 1 y 5");
