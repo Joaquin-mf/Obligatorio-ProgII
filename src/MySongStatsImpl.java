@@ -25,8 +25,8 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv";
-
+        String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/Dataset copy.csv";
+        // /Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
             br.readLine();
@@ -195,7 +195,7 @@ public class MySongStatsImpl implements MySongStats {
             }
             current=current.plusDays(1);
         }
-        System.out.println("Las canciones entre: \n -"+TempoMin+" < Tempo < "+TempoMax+"\n -"+ fechaInicio.toString()+" < Fecha < "+fechaFin.toString()+"\n Respuesta ----> "+lista.size()+" canciones");
+        System.out.println("Las canciones entre: \n ∞ "+TempoMin+" < Tempo < "+TempoMax+"\n ∞ "+ fechaInicio.toString()+" < Fecha < "+fechaFin.toString()+"\n Respuesta ----> "+lista.size()+" canciones");
         return lista.size();
     }
 
