@@ -34,7 +34,7 @@ public class Main {
                 try {
                     main.Top10(fecha,NombrePais);
                 } catch (ElementNotFoundException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("\033[31mElementNotFound\033[0m");
                 }
             }else if(numero==2){
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -50,11 +50,10 @@ public class Main {
                         System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
                     }
                 }
-                System.out.println(fecha.toString());
                 try {
                     main.Top5inTop50(fecha);
                 } catch (ElementNotFoundException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("\033[31mElementNotFound\033[0m");
                 }
             }else if(numero==3){
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -139,11 +138,11 @@ public class Main {
                 try {
                     main.SongsbetweenTempoAndDate(TempoMax, TempoMin, fechaInicio, fechaFin);
                 } catch (WrongOrder e) {
-                    throw new RuntimeException(e);
+                    System.out.println("\033[31mWorngOrder\033[0m");
                 }
             }else if(numero == 6){
                 System.out.println("Programa Finalizado");
-                System.out.println("-----Gracias-----");
+                System.out.println("\u001B[32m-----Gracias-----\u001B[0m");
                 flag = true;
             }else{
                 System.out.println("elija un numero entre 1 y 5");

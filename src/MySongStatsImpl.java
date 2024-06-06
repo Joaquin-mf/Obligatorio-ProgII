@@ -105,8 +105,13 @@ public class MySongStatsImpl implements MySongStats {
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
         System.out.println("El top 10 del "+fecha.toString()+" en "+Pais+":\n");
         for (int i = 0; i <= 9; i++) {
-            lista.add(songsList.get(i));
-            System.out.println((i+1)+". "+songsList.get(i).getName()+ " tiene el rank: " + songsList.get(i).getDailyRank());
+            SpotifySong song = songsList.get(i);
+            lista.add(song);
+            System.out.println(song.getDailyRank()+". "+song.getName()+" ARTISTAS:");
+
+            for(int j=0; j < song.getArtists().size(); j++){
+                System.out.println(" – "+song.getArtists().get(j).getName());
+            }
         }
         return lista;
     }
