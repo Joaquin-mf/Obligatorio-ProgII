@@ -1,3 +1,6 @@
+import exceptions.ElementNotFoundException;
+import exceptions.WrongOrder;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -28,7 +31,11 @@ public class Main {
                         System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
                     }
                 }
-                main.Top10(fecha,NombrePais);
+                try {
+                    main.Top10(fecha,NombrePais);
+                } catch (ElementNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }else if(numero==2){
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 LocalDate fecha = null;
@@ -44,7 +51,11 @@ public class Main {
                     }
                 }
                 System.out.println(fecha.toString());
-                main.Top5inTop50(fecha);
+                try {
+                    main.Top5inTop50(fecha);
+                } catch (ElementNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }else if(numero==3){
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 LocalDate fechaInicio = null;
@@ -71,7 +82,11 @@ public class Main {
                         System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
                     }
                 }
-                main.Top7inTop50(fechaInicio,fechaFin);
+                try {
+                    main.Top7inTop50(fechaInicio,fechaFin);
+                } catch (WrongOrder e) {
+                    System.out.println("\033[31mWorngOrder\033[0m");
+                }
             }else if(numero==4){
                 scanner.nextLine(); //Limpio buffer del teclado
                 System.out.println("Ingrese el nombre del artista:");
@@ -121,7 +136,11 @@ public class Main {
                         System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
                     }
                 }
-                main.SongsbetweenTempoAndDate(TempoMax, TempoMin, fechaInicio, fechaFin);
+                try {
+                    main.SongsbetweenTempoAndDate(TempoMax, TempoMin, fechaInicio, fechaFin);
+                } catch (WrongOrder e) {
+                    throw new RuntimeException(e);
+                }
             }else if(numero == 6){
                 System.out.println("Programa Finalizado");
                 System.out.println("-----Gracias-----");

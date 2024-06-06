@@ -27,7 +27,7 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/Dataset copy.csv";
+        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv";
         // /Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
@@ -53,6 +53,7 @@ public class MySongStatsImpl implements MySongStats {
                 MyList<Artists> artistas = new MyLinkedListImpl<>();
                 String[] nombresArtistas = columnas[2].split(", "); // Suponiendo que los artistas están separados por coma
                 for (String nombreArtista : nombresArtistas) {
+//                    nombreArtista.toLowerCase();
                     artistas.add(new Artists(nombreArtista)); //RAROOOOO
                 }
 
