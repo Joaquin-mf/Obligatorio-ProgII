@@ -22,8 +22,7 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/universal_top_spotify_songs.csv";
-        // /Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv
+        String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/universal_top_spotify_songs.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
             br.readLine();
