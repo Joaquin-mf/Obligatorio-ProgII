@@ -9,7 +9,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Inicializando programa \n");
+        long inicio = System.currentTimeMillis();
         MySongStats main = new MySongStatsImpl();
+        long fin = System.currentTimeMillis();
+        long tiempoTranscurrido = fin - inicio;
+        System.out.println("Tiempo: "+(tiempoTranscurrido)+" segundos");
         Scanner scanner = new Scanner(System.in);
         boolean flag = false;
         while (flag == false) {

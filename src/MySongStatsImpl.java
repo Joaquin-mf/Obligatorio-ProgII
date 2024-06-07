@@ -2,28 +2,23 @@ import Entities.Artists;
 import Entities.SpotifySong;
 import exceptions.ElementNotFoundException;
 import exceptions.WrongOrder;
-import uy.edu.um.tad.binarytree.BinaryTree;
-import uy.edu.um.tad.binarytree.SearchBinaryTreeImpl;
-import uy.edu.um.tad.hash.HashNode;
 import uy.edu.um.tad.hash.MyHash;
 import uy.edu.um.tad.hash.MyHashImpl;
 import uy.edu.um.tad.heap.MyHeap;
 import uy.edu.um.tad.heap.MyHeapImpl;
 import uy.edu.um.tad.linkedlist.MyLinkedListImpl;
 import uy.edu.um.tad.linkedlist.MyList;
-import uy.edu.um.tad.ntree.TreeImpl;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 
 public class MySongStatsImpl implements MySongStats {
-    private MyHash<String, MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(113);
-    private MyHash<String, MyList<SpotifySong>> hashDate = new MyHashImpl<>(113);
-    private MyHash<String, MyList<SpotifySong>> hashArtistDate = new MyHashImpl<>(113);
+    private MyHash<String, MyList<SpotifySong>> hashDateCountry = new MyHashImpl<>(25000);
+    private MyHash<String, MyList<SpotifySong>> hashDate = new MyHashImpl<>(345);
+    private MyHash<String, MyList<SpotifySong>> hashArtistDate = new MyHashImpl<>(631560);
 
 
     public MySongStatsImpl() {
@@ -40,6 +35,12 @@ public class MySongStatsImpl implements MySongStats {
                 //Manejo de canciones problematicas
                 linea = linea.replaceAll("Dear My Friend,", "Dear My Friend");
                 linea = linea.replaceAll("Ya no me duele :,\\)", "Ya no me duele :)");
+                linea = linea.replaceAll("你，好不好？ - TVBS連續劇【遺憾拼圖】片尾曲", "你好不好？ - TVBS連續劇【遺憾拼圖】片尾曲");
+                linea = linea.replaceAll("愛，教會我們的事","愛教會我們的事");
+                linea = linea.replaceAll("最後一堂課 - 《媽,別鬧了!》影集片尾曲","最後一堂課 - 《媽別鬧了!》影集片尾曲");
+                linea = linea.replaceAll("Rochy RD,Carlos Boutique Por El Respeto","Rochy RDCarlos Boutique Por El Respeto");
+                linea = linea.replaceAll("3,14","314");
+                linea = linea.replaceAll("1,2,3 Soleil","123 Soleil");
                 linea = linea.replaceAll(",", "∆");
                 linea = linea.replaceAll("Ω", ", ");
                 //Manejo de canciones problematicas
