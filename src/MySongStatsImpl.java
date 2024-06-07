@@ -22,32 +22,17 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
-        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv";
+        String archivoCSV = "/Users/joaquinmartirena/Desktop/Obligatorio-ProgII/universal_top_spotify_songs.csv";
         // /Users/joaquinmartirena/Desktop/Obligatorio-ProgII/Dataset copy.csv
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
             br.readLine();
             String linea;
             while ((linea = br.readLine()) != null) {
-                // Usa el separador para dividir la línea en columnas
 
-                linea = linea.replaceAll(", ", "Ω");
-                //Manejo de canciones problematicas
-                linea = linea.replaceAll("Dear My Friend,", "Dear My Friend");
-                linea = linea.replaceAll("Ya no me duele :,\\)", "Ya no me duele :)");
-                linea = linea.replaceAll("你，好不好？ - TVBS連續劇【遺憾拼圖】片尾曲", "你好不好？ - TVBS連續劇【遺憾拼圖】片尾曲");
-                linea = linea.replaceAll("愛，教會我們的事","愛教會我們的事");
-                linea = linea.replaceAll("最後一堂課 - 《媽,別鬧了!》影集片尾曲","最後一堂課 - 《媽別鬧了!》影集片尾曲");
-                linea = linea.replaceAll("Rochy RD,Carlos Boutique Por El Respeto","Rochy RDCarlos Boutique Por El Respeto");
-                linea = linea.replaceAll("3,14","314");
-                linea = linea.replaceAll("1,2,3 Soleil","123 Soleil");
-                linea = linea.replaceAll(",", "∆");
-                linea = linea.replaceAll("Ω", ", ");
-                //Manejo de canciones problematicas
-                linea = linea.replaceAll("Ya no me duele :\\)", "Ya no me duele :,)");
-                linea = linea.replaceAll("Dear My Friend", "Dear My Friend,");
+                linea = linea.replaceAll("\",\"", "∆");
 
-                linea = linea.replaceAll("[\";]", "");
+                linea = linea.replaceAll("[;]", "");
                 String[] columnas = linea.split("∆");
 
                 // Crear lista de artistas a partir de los datos
@@ -55,7 +40,7 @@ public class MySongStatsImpl implements MySongStats {
                 String[] nombresArtistas = columnas[2].split(", "); // Suponiendo que los artistas están separados por coma
                 for (String nombreArtista : nombresArtistas) {
 //                    nombreArtista.toLowerCase();
-                    artistas.add(new Artists(nombreArtista)); //RAROOOOO
+                    artistas.add(new Artists(nombreArtista));
                 }
 
                 // Crea un objeto SpotifySong con los datos de la línea
