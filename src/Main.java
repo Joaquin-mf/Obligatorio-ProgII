@@ -13,7 +13,7 @@ public class Main {
         MySongStats main = new MySongStatsImpl();
         long fin = System.currentTimeMillis();
         long tiempoTranscurrido = fin - inicio;
-        System.out.println("Tiempo: "+(tiempoTranscurrido)+" segundos");
+        System.out.println("Tiempo: "+(tiempoTranscurrido)+" milisegundos");
         Scanner scanner = new Scanner(System.in);
         boolean flag = false;
         while (flag == false) {
