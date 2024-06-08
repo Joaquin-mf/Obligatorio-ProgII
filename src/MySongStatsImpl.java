@@ -26,7 +26,7 @@ public class MySongStatsImpl implements MySongStats {
         runtime.gc();
         long memoriaAntesCarga = runtime.totalMemory() - runtime.freeMemory();
 
-        String archivoCSV = "";
+        String archivoCSV = "universal_top_spotify_songs.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
             br.readLine();
