@@ -22,6 +22,10 @@ public class MySongStatsImpl implements MySongStats {
 
 
     public MySongStatsImpl() {
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc();
+        long memoriaAntesCarga = runtime.totalMemory() - runtime.freeMemory();
+
         String archivoCSV = "/Users/juan/Library/Mobile Documents/com~apple~CloudDocs/Facultad/Programacion 2/Prácticos/Obligatorio-ProgII/universal_top_spotify_songs.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             // Ignorar la primera línea
@@ -79,6 +83,9 @@ public class MySongStatsImpl implements MySongStats {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        long memoriaDespuesCarga = runtime.totalMemory() - runtime.freeMemory();
+        long memoriaUsadaCarga = memoriaDespuesCarga - memoriaAntesCarga;
+        System.out.println("Memoria usada en la carga de datos: " + memoriaUsadaCarga + " bytes");
     }
 
     @Override
