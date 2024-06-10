@@ -115,11 +115,6 @@ public class MySongStatsImpl implements MySongStats {
             throw new ElementNotFoundException();
         }
 
-        for (int i = 0; i < lista.size(); i++) {
-            SpotifySong song = lista.get(i);
-            song.setCounter(0);
-        }
-
         MyHashImpl<String,SpotifySong> hashSong = new MyHashImpl<>(113);
 
         for(int i=0; i < lista.size(); i++){
@@ -172,29 +167,31 @@ public class MySongStatsImpl implements MySongStats {
                 for(int j=0; j<listaArtista.size();j++){
                     Artists artist = listaArtista.get(j);
                     if(!artists.contains(artist.getName())){
-                        artist.setRank(1);
                         artists.put(artist.getName(),artist);
                     }
                     Artists var = artists.findData(artist.getName());
-                    int ocurrencia = var.getRank();
-                    var.setRank(ocurrencia+1);
+                    var.setRank(var.getRank()+1);
                 }
             }
             current = current.plusDays(1);
         }
-        MyList<Artists> lista = new MyLinkedListImpl<>();
+
+        MyHeap<Artists> heap = new MyHeapImpl<>(100, false);
         for(int i=0; i<artists.getHashTable().length; i++){
             if(artists.getHashTable()[i] != null){
-                lista.add(artists.getHashTable()[i].getData());
+                heap.insert(artists.getHashTable()[i].getData());
             }
         }
-        lista.sort();
+
 //        for(int i=0; i< lista.size(); i++){
 //            System.out.println(lista.get(i).getName()+" ___ "+lista.get(i).getRank());
-
+        MyList<Artists> lista = new MyLinkedListImpl<>();
         for(int i=0; i<7;i++) {
-            System.out.println((i+1)+". "+lista.get(i).getName() + " con: " + lista.get(i).getRank() + " ocurrencias");
+            Artists var = heap.delete();
+            System.out.println((i+1)+". "+var.getName() + " con: " + var.getRank() + " ocurrencias");
+            lista.add(var);
         }
+
         return lista;
     }
 
@@ -224,7 +221,8 @@ public class MySongStatsImpl implements MySongStats {
             }
 
             for(int i=0; i<listaSongs.size();i++){
-                if(listaSongs.get(i).getTempo()<TempoMax && listaSongs.get(i).getTempo()<TempoMin){
+                if(listaSongs.get(i).getTempo()<TempoMax && listaSongs.get(i).getTempo()>TempoMin){
+                    System.out.println(listaSongs.get(i));
                     lista.add(listaSongs.get(i));
                 }
             }

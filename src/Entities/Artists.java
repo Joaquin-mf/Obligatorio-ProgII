@@ -12,11 +12,11 @@ public class Artists implements Comparable<Artists> {
     }
 
     @Override
-    public int compareTo(Artists artists) {
-        if (artists == null) {
-            throw new NullPointerException("The argument 'artists' is null");
+    public int compareTo(Artists otherArtist) {
+        if (otherArtist == null) {
+            throw new NullPointerException("The argument 'otherArtist' is null");
         }
-        return Integer.compare(this.rank, artists.getRank());
+        return Integer.compare(this.rank, otherArtist.getRank());
     }
 
     @Override

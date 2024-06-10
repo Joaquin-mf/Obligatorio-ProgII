@@ -144,6 +144,7 @@ public class Main {
                     }
                 }
                 try {
+                    System.out.println("Canciones con tempo entre "+TempoMin+" y "+TempoMax+" entre "+fechaInicio+" y "+fechaFin);
                     main.SongsbetweenTempoAndDate(TempoMax, TempoMin, fechaInicio, fechaFin);
                 } catch (WrongOrder e) {
                     System.out.println("\033[31mWorngOrder\033[0m");
