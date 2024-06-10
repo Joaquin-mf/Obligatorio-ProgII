@@ -131,7 +131,8 @@ public class MySongStatsImpl implements MySongStats {
             cancion.setCounter(cancion.getCounter() + 1);
         }
 
-        MyHeap<SpotifySong> heap = new MyHeapImpl<>(5, true);
+
+        MyHeap<SpotifySong> heap = new MyHeapImpl<>(100, true);
         for (int i=0; i<hashSong.getHashTable().length;i++){
             if(hashSong.getHashTable()[i] != null){
                 heap.insert(hashSong.getHashTable()[i].getData());
@@ -141,8 +142,9 @@ public class MySongStatsImpl implements MySongStats {
         System.out.println("___Top 5 en el top 50___" + fecha.toString());
         MyList<SpotifySong> ans = new MyLinkedListImpl<>();
         for(int i=0; i<=4; i++){
-            ans.add(heap.get());
-            System.out.println((i+1)+". "+heap.delete().getName()+" "+ heap.delete().getCounter());
+            SpotifySong song1 = heap.delete();
+            System.out.println((i+1)+". "+song1.getName()+" "+ song1.getCounter());
+            ans.add(song1);
         }
         return ans;
     }

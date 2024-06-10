@@ -109,18 +109,24 @@ public class SpotifySong implements Comparable<SpotifySong> {
         this.counter = counter;
     }
 
+//    @Override
+//    public int compareTo(SpotifySong spotifySong) {
+//        if(spotifySong.getCounter()==0){
+//        if(dailyRank < spotifySong.getDailyRank()) {return -1;}
+//        else if (dailyRank == spotifySong.getDailyRank()) {return 0;}
+//        return 1;
+//        }
+//        else{
+//            if(counter < spotifySong.getCounter()){return 1;}
+//            else if(counter == spotifySong.getDailyRank()){return 0;}
+//            return -1;
+//        }
+//    }
     @Override
     public int compareTo(SpotifySong spotifySong) {
-        if(spotifySong.getCounter()==0){
-        if(dailyRank < spotifySong.getDailyRank()) {return -1;}
-        else if (dailyRank == spotifySong.getDailyRank()) {return 0;}
-        return 1;
-        }
-        else{
-            if(counter < spotifySong.getCounter()){return 1;}
-            else if(counter == spotifySong.getDailyRank()){return 0;}
-            return -1;
-        }
+        if(counter < spotifySong.getCounter()){return 1;}
+        else if(counter == spotifySong.getCounter()){return 0;}
+        return -1;
     }
 }
 
