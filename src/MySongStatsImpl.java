@@ -148,12 +148,19 @@ public class MySongStatsImpl implements MySongStats {
             throw new WrongOrder();
         }
 
-        LocalDate current = fechaFin;
+        LocalDate current = fechaInicio;
         MyHashImpl<String,Artists> artists = new MyHashImpl<>(1113);
 
         //manejo del rango de fechas
         while(!current.equals(fechaFin.plusDays(1))){
             MyList<SpotifySong> listaHash = hashDate.findData(current.toString());
+
+
+            if(listaHash == null){
+                current = current.plusDays(1);
+                continue;
+            }
+
             for(int i=0; i<listaHash.size();i++){
                 MyList<Artists> listaArtista = listaHash.get(i).getArtists();
                 for(int j=0; j<listaArtista.size();j++){
@@ -188,6 +195,7 @@ public class MySongStatsImpl implements MySongStats {
     @Override
     public int OccurrenciesArtistinTop50(String name, LocalDate fecha) {
         MyList<SpotifySong> songs = hashArtistDate.findData(fecha.toString() + "_" + name);
+        // songd null;
         System.out.println("La cantidad de ocurrencias de "+ name + " es: "+songs.size());
         return songs.size();
     }
