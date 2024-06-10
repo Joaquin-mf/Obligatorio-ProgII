@@ -114,12 +114,17 @@ public class MySongStatsImpl implements MySongStats {
         if(lista==null){
             throw new ElementNotFoundException();
         }
+
+        for (int i = 0; i < lista.size(); i++) {
+            SpotifySong song = lista.get(i);
+            song.setCounter(0);
+        }
+
         MyHashImpl<String,SpotifySong> hashSong = new MyHashImpl<>(113);
 
         for(int i=0; i < lista.size(); i++){
             SpotifySong song = lista.get(i);
             if(!hashSong.contains(song.getName())){
-                song.setCounter(1);
                 hashSong.put(song.getName(),song);
             }
             SpotifySong cancion = hashSong.findData(song.getName());
@@ -154,7 +159,6 @@ public class MySongStatsImpl implements MySongStats {
         //manejo del rango de fechas
         while(!current.equals(fechaFin.plusDays(1))){
             MyList<SpotifySong> listaHash = hashDate.findData(current.toString());
-
 
             if(listaHash == null){
                 current = current.plusDays(1);
@@ -193,8 +197,9 @@ public class MySongStatsImpl implements MySongStats {
     }
 
     @Override
-    public int OccurrenciesArtistinTop50(String name, LocalDate fecha) {
+    public int OccurrenciesArtistinTop50(String name, LocalDate fecha) throws ElementNotFoundException {
         MyList<SpotifySong> songs = hashArtistDate.findData(fecha.toString() + "_" + name);
+        if (songs == null){throw new ElementNotFoundException();}
         // songd null;
         System.out.println("La cantidad de ocurrencias de "+ name + " es: "+songs.size());
         return songs.size();
@@ -206,10 +211,16 @@ public class MySongStatsImpl implements MySongStats {
             throw new WrongOrder();
         }
 
-        LocalDate current = fechaFin;
+        LocalDate current = fechaInicio;
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
         while(!current.equals(fechaFin.plusDays(1))){
             MyList<SpotifySong> listaSongs = hashDate.findData(current.toString());
+
+            if(listaSongs == null){
+                current = current.plusDays(1);
+                continue;
+            }
+
             for(int i=0; i<listaSongs.size();i++){
                 if(listaSongs.get(i).getTempo()<TempoMax && listaSongs.get(i).getTempo()<TempoMin){
                     lista.add(listaSongs.get(i));

@@ -108,7 +108,11 @@ public class Main {
                         System.out.println("Error: formato de fecha inválido. Por favor, intenta nuevamente.");
                     }
                 }
-                main.OccurrenciesArtistinTop50(NombreArtista,fecha);
+                try {
+                    main.OccurrenciesArtistinTop50(NombreArtista,fecha);
+                } catch (ElementNotFoundException e) {
+                    System.out.println("\033[31mElementNotFound\033[0m");
+                }
             }else if(numero==5){
                 System.out.println("Ingrese el tempo máximo: ");
                 int TempoMax = scanner.nextInt();

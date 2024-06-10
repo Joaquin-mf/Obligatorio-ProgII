@@ -14,7 +14,7 @@ public interface MySongStats {
 
     public MyList<Artists> Top7inTop50(LocalDate fechaInicio, LocalDate fechaFin) throws WrongOrder;
 
-    public int OccurrenciesArtistinTop50(String name, LocalDate fecha);
+    public int OccurrenciesArtistinTop50(String name, LocalDate fecha) throws ElementNotFoundException;
 
     public int SongsbetweenTempoAndDate(float TempoMax, float TempoMin, LocalDate fechaInicio, LocalDate fechaFin) throws WrongOrder;
 
