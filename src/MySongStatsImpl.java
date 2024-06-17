@@ -81,8 +81,8 @@ public class MySongStatsImpl implements MySongStats {
             e.printStackTrace();
         }
         long memoriaDespuesCarga = runtime.totalMemory() - runtime.freeMemory();
-        long memoriaUsadaCarga = memoriaDespuesCarga - memoriaAntesCarga;
-        System.out.println("Memoria usada en la carga de datos: " + memoriaUsadaCarga + " bytes");
+        double memoriaUsadaCarga = memoriaDespuesCarga - memoriaAntesCarga;
+        System.out.println("Memoria usada en la carga de datos: " + (memoriaUsadaCarga/1000000) + " MB (megabytes)");
     }
 
     @Override
