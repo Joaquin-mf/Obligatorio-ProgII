@@ -48,12 +48,9 @@ public class MySongStatsImpl implements MySongStats {
 
                 // Crea un objeto SpotifySong con los datos de la línea
                 SpotifySong cancion = new SpotifySong(
-                        columnas[0], // SpotifyId
                         columnas[1], // Name
                         artistas, // Lista de artistas
                         Integer.parseInt(columnas[3]), // DailyRank
-                        Integer.parseInt(columnas[4]), // DailyMovement
-                        Integer.parseInt(columnas[5]), // WeeklyMovement
                         columnas[6], // Country
                         LocalDate.parse(columnas[7]), // SnapshotDate
                         Double.parseDouble(columnas[23]) // Tempo
@@ -221,13 +218,13 @@ public class MySongStatsImpl implements MySongStats {
             }
 
             for(int i=0; i<listaSongs.size();i++){
-                if(listaSongs.get(i).getTempo()<TempoMax && listaSongs.get(i).getTempo()>TempoMin){
-                    System.out.println(listaSongs.get(i));
+                if(listaSongs.get(i).getTempo() < TempoMax && listaSongs.get(i).getTempo() > TempoMin){
                     lista.add(listaSongs.get(i));
                 }
             }
             current=current.plusDays(1);
         }
+        System.out.println(current.toString());
         System.out.println("Las canciones entre: \n ∞ "+TempoMin+" < Tempo < "+TempoMax+"\n ∞ "+ fechaInicio.toString()+" < Fecha < "+fechaFin.toString()+"\n Respuesta ----> "+lista.size()+" canciones");
         return lista.size();
     }

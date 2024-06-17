@@ -40,7 +40,4 @@ public class Artists implements Comparable<Artists> {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }
