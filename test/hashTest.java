@@ -40,9 +40,9 @@ public class hashTest { // put, find, remove, contains, findNode
         assertFalse(tablaHash.contains(23));
     }
     @Test
-    public void TestFindNode() throws reSize {
-        HashNode<Integer,String> nodo = new HashNode<>(43,"Sofia");
-        assertEquals(nodo, tablaHash.findNode(43));
+    public void TestFindData() throws reSize {
+        tablaHash.put(43,"Sofia");
+        assertEquals("Sofia",tablaHash.findData(43));
     }
 }
 
