@@ -209,8 +209,8 @@ public class MySongStatsImpl implements MySongStats {
 
         LocalDate current = fechaInicio;
         MyList<SpotifySong> lista = new MyLinkedListImpl<>();
+        MyList<SpotifySong> listaSongs = hashDate.findData(current.toString());
         while(!current.equals(fechaFin.plusDays(1))){
-            MyList<SpotifySong> listaSongs = hashDate.findData(current.toString());
 
             if(listaSongs == null){
                 current = current.plusDays(1);
@@ -218,13 +218,13 @@ public class MySongStatsImpl implements MySongStats {
             }
 
             for(int i=0; i<listaSongs.size();i++){
-                if(listaSongs.get(i).getTempo() < TempoMax && listaSongs.get(i).getTempo() > TempoMin){
+                if(listaSongs.get(i).getTempo() < TempoMax && listaSongs.get(i).getTempo() > TempoMin && !lista.contains(listaSongs.get(i))){
                     lista.add(listaSongs.get(i));
                 }
             }
             current=current.plusDays(1);
         }
-        System.out.println(current.toString());
+
         System.out.println("Las canciones entre: \n ∞ "+TempoMin+" < Tempo < "+TempoMax+"\n ∞ "+ fechaInicio.toString()+" < Fecha < "+fechaFin.toString()+"\n Respuesta ----> "+lista.size()+" canciones");
         return lista.size();
     }
